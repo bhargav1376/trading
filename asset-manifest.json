@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/bhargav1376/trading.git/static/css/main.b5b8811a.css",
-    "main.js": "/bhargav1376/trading.git/static/js/main.02d6a6c5.js",
+    "main.css": "/bhargav1376/trading.git/static/css/main.56d90464.css",
+    "main.js": "/bhargav1376/trading.git/static/js/main.0d05d320.js",
     "static/media/Backgrondotp.png": "/bhargav1376/trading.git/static/media/Backgrondotp.ed49e987248a860b76c1.png",
     "static/media/backgroung_sendotp.png": "/bhargav1376/trading.git/static/media/backgroung_sendotp.e035b7bbb7259fae0642.png",
     "static/media/bgupdateimg.png": "/bhargav1376/trading.git/static/media/bgupdateimg.fad5f4faa17cea1d0f65.png",
@@ -11,11 +11,11 @@
     "static/media/section_about_upper.png": "/bhargav1376/trading.git/static/media/section_about_upper.185625fe2c30f2086230.png",
     "static/media/Section_About-black.png": "/bhargav1376/trading.git/static/media/Section_About-black.6ff50ace3200b8167be2.png",
     "index.html": "/bhargav1376/trading.git/index.html",
-    "main.b5b8811a.css.map": "/bhargav1376/trading.git/static/css/main.b5b8811a.css.map",
-    "main.02d6a6c5.js.map": "/bhargav1376/trading.git/static/js/main.02d6a6c5.js.map"
+    "main.56d90464.css.map": "/bhargav1376/trading.git/static/css/main.56d90464.css.map",
+    "main.0d05d320.js.map": "/bhargav1376/trading.git/static/js/main.0d05d320.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5b8811a.css",
-    "static/js/main.02d6a6c5.js"
+    "static/css/main.56d90464.css",
+    "static/js/main.0d05d320.js"
   ]
 }
