@@ -16,7 +16,7 @@ import Profile from './Weblogin/Profile/Profile';
 
 function App() {
     return (
-        <Router basename="/bhargav1376/trading.git">
+        <Router basename="/trading">
             <div className="App">
                 <Routes>
                     <Route path="/signin" element={<Signin />} />
