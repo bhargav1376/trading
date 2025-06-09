@@ -2,24 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import './darkmode.css';
-import atsLogo from './images/Logo.png';
-import trading5 from './images/cuttrading5.jpeg';
-import trading1 from './images/cuttrading1.jpeg';
-import trading3 from './images/trading3.jpg';
-import demobg1 from './images/demobg1wat.png';
-import trading10 from './images/trading10.webp';
-import ind1 from './images/ind1.webp';
-import ind2 from './images/ind2.webp';
-import ind3 from './images/ind3.webp';
-import ind4 from './images/ind4.webp';
-// Import slider images
-import slider1 from './images/sliderimgs/silder1.jpg';
-import slider2 from './images/sliderimgs/slider2.jpg';
-import slider3 from './images/sliderimgs/slider3.jpg';
-import slider4 from './images/sliderimgs/slider4.jpg';
-import slider5 from './images/sliderimgs/slider5.jpg';
-import slider6 from './images/sliderimgs/slider6.jpg';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -66,8 +48,6 @@ function Home() {
     };
 
     const [currentSlide, setCurrentSlide] = useState(0);
-    const sliderWrapperRef = useRef(null);
-    const slidesRef = useRef([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openModal, setOpenModal] = useState(null);
     const [showDemoModal, setShowDemoModal] = useState(false);
@@ -82,83 +62,73 @@ function Home() {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const animateSlideOut = (index) => {
-        const img = slidesRef.current[index]?.querySelector("img.Img_slider-img");
-        const textEls = slidesRef.current[index]?.querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
+        const img = document.querySelectorAll('.slide')[index]?.querySelector("img.Img_slider-img");
+        const textEls = document.querySelectorAll('.slide')[index]?.querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
 
         if (img) img.classList.remove("show");
         textEls?.forEach(el => el.classList.remove("show"));
     };
 
     const animateSlideIn = (index) => {
-        const img = slidesRef.current[index]?.querySelector("img.Img_slider-img");
-        const textEls = slidesRef.current[index]?.querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
+        const img = document.querySelectorAll('.slide')[index]?.querySelector("img.Img_slider-img");
+        const textEls = document.querySelectorAll('.slide')[index]?.querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
 
         if (img) img.classList.add("show");
         setTimeout(() => {
             textEls?.forEach(el => el.classList.add("show"));
         }, 600);
     };
-    const currentSlideRef = useRef(0);
 
     const showSlide = useCallback((index) => {
-        animateSlideOut(currentSlideRef.current);
+        animateSlideOut(currentSlide);
     
         setTimeout(() => {
-            if (sliderWrapperRef.current) {
-                sliderWrapperRef.current.style.transform = `translateX(-${index * 100}%)`;
+            if (document.querySelector('.Slider')) {
+                const slider = document.querySelector('.Slider');
+                slider.style.transform = `translateX(-${index * 100}%)`;
                 setTimeout(() => {
                     animateSlideIn(index);
-                    setCurrentSlide(index);              // React state
-                    currentSlideRef.current = index;     // Ref for interval
+                    setCurrentSlide(index);
                 }, 100);
             }
-        }, 500);
-    }, []);
-    
-    
+        }, 100);
+    }, [currentSlide, animateSlideIn, animateSlideOut]);
 
     const handleNextSlide = useCallback(() => {
-        const nextIndex = (currentSlideRef.current + 1) % slidesRef.current.length;
+        const nextIndex = (currentSlide + 1) % 6;
         showSlide(nextIndex);
-    }, [showSlide]);
+    }, [currentSlide, showSlide]);
     
-
-    const handlePrevSlide = () => {
-        const prevIndex = (currentSlideRef.current - 1 + slidesRef.current.length) % slidesRef.current.length;
+    const handlePrevSlide = useCallback(() => {
+        const prevIndex = (currentSlide - 1 + 6) % 6;
         showSlide(prevIndex);
-    };
-    
+    }, [currentSlide, showSlide]);
 
     useEffect(() => {
-        // Initialize first slide
-        showSlide(currentSlideRef.current);
+        showSlide(currentSlide);
 
-        // Set up auto-slide interval
         const interval = setInterval(() => {
             handleNextSlide();
         }, 5000);
 
-        // Cleanup interval on component unmount
         return () => clearInterval(interval);
-    }, [handleNextSlide, showSlide]);
+    }, [handleNextSlide, showSlide, currentSlide]);
 
-    // Scroll button functionality
     useEffect(() => {
         const mybutton = document.getElementById("scrollmyBtn");
 
         const scrollFunction = () => {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                mybutton.style.opacity = "1"; // Make it visible
-                mybutton.style.pointerEvents = "auto"; // Enable clicking
+                mybutton.style.opacity = "1";
+                mybutton.style.pointerEvents = "auto";
             } else {
-                mybutton.style.opacity = "0"; // Hide it
-                mybutton.style.pointerEvents = "none"; // Disable clicking
+                mybutton.style.opacity = "0";
+                mybutton.style.pointerEvents = "none";
             }
         };
 
         window.addEventListener('scroll', scrollFunction);
 
-        // Cleanup function
         return () => {
             window.removeEventListener('scroll', scrollFunction);
         };
@@ -166,27 +136,27 @@ function Home() {
 
     const slides = [
         {
-            img: trading5,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/cuttrading5.jpeg',
             title: "Professional Trading",
             desc: "Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights."
         },
         {
-            img: trading1,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/cuttrading1.jpeg',
             title: "Advanced Charts",
             desc: "Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data."
         },
         {
-            img: trading3,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/trading3.jpg',
             title: "Smart Alerts",
             desc: "Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices."
         },
         {
-            img: demobg1,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/demobg1wat.png',
             title: "Global Access",
             desc: "Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading."
         },
         {
-            img: trading10,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/trading10.webp',
             title: "Secure Portfolio",
             desc: "Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind."
         }
@@ -199,7 +169,6 @@ function Home() {
     const contactSectionRef = useRef(null);
     const aboutSectionRef = useRef(null);
 
-    // Indicators section animation
     useEffect(() => {
         const headingEls = headingRef.current ? [
             headingRef.current.querySelector('h1.Head_ind'),
@@ -207,7 +176,6 @@ function Home() {
         ] : [];
         const gridItems = gridRefs.current;
 
-        // Headings observer
         const sectionObserver = new window.IntersectionObserver(
             (entries, observer) => {
                 entries.forEach((entry) => {
@@ -226,7 +194,6 @@ function Home() {
             sectionObserver.observe(headingRef.current);
         }
 
-        // Grid observer
         const gridObserver = new window.IntersectionObserver(
             (entries, observer) => {
                 entries.forEach((entry) => {
@@ -249,7 +216,6 @@ function Home() {
         };
     }, []);
 
-    // Modal state for indicators
     const handleOpenModal = useCallback((modalId) => {
         setOpenModal(modalId);
     }, []);
@@ -262,42 +228,39 @@ function Home() {
         }
     };
 
-    // Indicator data
     const indicators = [
         {
             id: 'rsiModal',
-            img: ind1,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind1.webp',
             title: 'Relative Strength Index',
             desc: 'The relative strength index (RSI) is a pivotal technical indicator used to evaluate the momentum and trend strength of a market. Oscillating between 0 and 100.',
             modalContent: `The Relative Strength Index (RSI) is a momentum indicator that measures the speed and change of price movements. It ranges from 0 to 100, signaling overbought conditions above 70 and oversold conditions below 30. Commonly used on a 14-period scale, RSI helps identify potential market reversals. Traders often combine it with other indicators for better accuracy. It's effective across different timeframes, making it suitable for both short-term and long-term strategies. RSI is a staple tool for technical analysis in all markets. It also helps traders confirm the strength of price trends. Divergence between RSI and price can signal upcoming reversals.`
         },
         {
             id: 'bollingerModal',
-            img: ind2,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind2.webp',
             title: 'Bollinger bands',
             desc: 'Bollinger bands are a popular technical analysis indicator employed to assess market volatility and price action. This technical indicator consists of three lines.',
             modalContent: `Bollinger Bands are a popular technical analysis indicator employed to assess market volatility and price action. This technical indicator consists of three lines. The middle line is a simple moving average (SMA), while the upper and lower bands are standard deviations from the SMA. When the bands widen, it indicates increased volatility; when they contract, it signals decreased volatility. Traders use Bollinger Bands to identify potential overbought or oversold conditions. Price touching the bands doesn't always imply reversal, but it's a cue for further analysis. They work well with candlestick patterns and other momentum indicators.`
         },
         {
             id: 'maModal',
-            img: ind3,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind3.webp',
             title: 'Moving averages',
             desc: 'Moving averages are fundamental technical indicators for traders looking to understand the sentiment of the market and price action.',
             modalContent: `Moving averages are fundamental technical indicators for traders looking to understand the sentiment of the market and price action. They help smooth out price data over a specific time period, allowing traders to identify trends more easily. The most common types are the Simple Moving Average (SMA) and the Exponential Moving Average (EMA), with the EMA giving more weight to recent prices. Moving averages are often used to identify support and resistance levels and provide trade signals when price crosses the moving average line. A crossover strategy, where the short-term moving average crosses above the long-term moving average.`
         },
         {
             id: 'macdModal',
-            img: ind4,
+            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind4.webp',
             title: 'Moving convergence',
             desc: 'Most traders recognize that the moving average convergence divergence (MACD) indicator is a pivotal technical indicator in assessing a price trend.',
             modalContent: `Most traders recognize that the Moving Average Convergence Divergence (MACD) indicator is a pivotal technical indicator in assessing a price trend. It works by subtracting the 26-period exponential moving average (EMA) from the 12-period EMA. The result is the MACD line, and a 9-period EMA of this line forms the signal line. Crossovers between these lines often indicate buy or sell signals. MACD also helps identify bullish or bearish momentum through divergence with price action. It's most effective in trending markets rather than sideways conditions. Traders often combine it with other indicators to enhance accuracy. Its histogram representation provides a clear visual of momentum shifts.`
         }
     ];
 
-    // Find the currently open indicator
     const activeIndicator = indicators.find(ind => ind.id === openModal);
 
-    // Demo section animation
     useEffect(() => {
         const section = demoSectionRef.current;
         if (!section) return;
@@ -324,52 +287,44 @@ function Home() {
         return () => observer.disconnect();
     }, []);
 
-    const openDemoModal = () => {
+    const demoModalRef = useRef(null);
+
+    const openDemoModal = useCallback(() => {
         setShowDemoModal(true);
-        // Add a small delay to ensure the modal is rendered before adding animation
-        setTimeout(() => {
-            const modal = demoModalRef.current;
-            if (modal) {
-                modal.style.display = "block";
-                modal.classList.remove("hide-modal");
-                void modal.offsetWidth; // force reflow
-                modal.classList.add("show-modal");
-            }
-        }, 0);
-    };
-
-    const closeDemoModal = () => {
-        const modal = demoModalRef.current;
-        if (modal) {
-            modal.classList.remove("show-modal");
-            modal.classList.add("hide-modal");
-            
-            const onAnimationEnd = () => {
-                modal.style.display = "none";
-                modal.classList.remove("hide-modal");
-                modal.removeEventListener("animationend", onAnimationEnd);
-                setShowDemoModal(false);
-            };
-            
-            modal.addEventListener("animationend", onAnimationEnd);
+        if (demoModalRef.current) {
+            demoModalRef.current.style.display = 'block';
+            setTimeout(() => {
+                demoModalRef.current.style.opacity = '1';
+            }, 10);
         }
-    };
+    }, []);
 
-    // Add click outside handler
+    const closeDemoModal = useCallback(() => {
+        if (demoModalRef.current) {
+            demoModalRef.current.style.opacity = '0';
+            setTimeout(() => {
+                setShowDemoModal(false);
+                demoModalRef.current.style.display = 'none';
+            }, 300);
+        }
+    }, []);
+
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (showDemoModal && demoModalRef.current && !demoModalRef.current.contains(event.target)) {
+            if (demoModalRef.current && !demoModalRef.current.contains(event.target)) {
                 closeDemoModal();
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
+        if (showDemoModal) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [showDemoModal]);
+    }, [showDemoModal, closeDemoModal]);
 
-    // Form validation functions
     const validateName = (name) => {
         if (!name.trim()) return 'Name is required';
         if (name.length < 2) return 'Name must be at least 2 characters long';
@@ -398,7 +353,6 @@ function Home() {
         return '';
     };
 
-    // Form state
     const [formStatus, setFormStatus] = useState({ type: '', message: '' });
 
     const validateForm = () => {
@@ -475,7 +429,6 @@ function Home() {
         }
     }, [formData]);
 
-    // Contact section animation
     useEffect(() => {
         const section = contactSectionRef.current;
         if (!section) return;
@@ -500,7 +453,6 @@ function Home() {
         return () => observer.disconnect();
     }, []);
 
-    // About section animation effect
     useEffect(() => {
         const section = aboutSectionRef.current;
         if (!section) return;
@@ -550,20 +502,16 @@ function Home() {
         );
     };
 
-    // Add state for login div visibility
     const [showLoginDiv, setShowLoginDiv] = useState(true);
 
-    // Add close handler
     const handleCloseLogin = () => {
         setShowLoginDiv(false);
     };
 
-    // Add close handler
     const toggleMenu = useCallback(() => {
         setIsMenuOpen(!isMenuOpen);
     }, [isMenuOpen]);
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             const menu = document.querySelector('.flex_navlist');
@@ -584,7 +532,7 @@ function Home() {
             <header className="Header">
                 <nav className="Nav_bar">
                     <div className="Logo">
-                        <img src="./images/logo.png" alt="Astrolite Logo" className="Logo_img" />
+                        <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/Logo.png" alt="Astrolite Logo" className="Logo_img" />
                     </div>
                     <div className="hamburger-menu" onClick={toggleMenu}>
                         <i className={`fa ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -644,12 +592,11 @@ function Home() {
 
             <section className="Image_slider">
                 <div className="Slider_wrapper">
-                    <div className="Slider" ref={sliderWrapperRef}>
+                    <div className="Slider">
                         {slides.map((slide, index) => (
                             <div 
                                 key={index} 
                                 className="Slider_img"
-                                ref={el => slidesRef.current[index] = el}
                             >
                                 <div className="grid_img">
                                     <div className="Img_slide">
@@ -759,7 +706,7 @@ function Home() {
                                 <div className="line2"></div>
                                 <div className="line3"></div>
                                 <div className="line4"></div>
-                                <img className="trading-image" src="./images/demoimage.jpeg" alt="Trading Business" />
+                                <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/demoimage.jpeg" alt="Trading Business" className="trading-image" />
                                 <div className="logo"> Trading <span>PRO</span></div>
                             </div>
                         </div>
@@ -767,59 +714,12 @@ function Home() {
                 </div>
             </section>
             
-
-
             {showDemoModal && (
-                <div 
-                    className="demo-modal" 
-                    ref={demoModalRef}
-                    style={{ display: 'none' }} // Initial state
-                >
-                    <div className="demo-contant-modal">
-                        <span 
-                            className="demo-close" 
-                            onClick={closeDemoModal}
-                            role="button"
-                            tabIndex={0}
-                            onKeyPress={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                    closeDemoModal();
-                                }
-                            }}
-                        >
-                            &times;
-                        </span>
-                        <div className="matter-demo_l">
-                            <h2 className="Account_de">Open Account</h2>
-                            <p className="wel_set">Welcome to the demo account setup. Explore features before signing up!</p>
-                        </div>
-                        <div className="video_demo">
-                            <iframe 
-                                className="video_demo_iframe"
-                                src="https://www.youtube.com/embed/wjlJE9r2Rus" 
-                                title="YouTube video player" 
-                                frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                        <div className="open_demo_acc">
-                            <div className="open_demo_acc_btn">
-                                <button className="open_demo_btn">
-                                    <span className="left-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 15" width="16" height="16" fill="currentColor">
-                                            <path d="M 10 0 L 10 5 L 5 5 L 0 0 Z M 0 5 L 5 5 L 10 10 L 5 10 L 5 15 L 0 10 Z"></path>
-                                        </svg>
-                                    </span>
-                                    <span className="btn-text">Open Demo Account</span>
-                                    <span className="right-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
+                <div className="demo-modal" ref={demoModalRef}>
+                    <div className="demo-modal-content">
+                        <h2>Demo Modal</h2>
+                        <p>This is a demo modal content.</p>
+                        <button onClick={closeDemoModal}>Close</button>
                     </div>
                 </div>
             )}
@@ -853,7 +753,7 @@ function Home() {
                             >
                                 <SwiperSlide>
                                 <div className="swiper-slide slider_img_graph-s ">    
-                                    <img className="slider_img_graph" src="./images/slider1.jpg" alt="Slide 1" />
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider1.jpg" alt="Slide 1" className="slider_img_graph" />
                                     <div className="slide-text">
                                         <h2 className="slider_name">Market Momentum</h2>
                                         <p className="slider_p-wapper">
@@ -866,7 +766,7 @@ function Home() {
 
                                 <SwiperSlide>
                                 <div className="swiper-slide slider_img_graph-s ">   
-                                    <img className="slider_img_graph" src="./images/slider5.jpg" alt="Slide 2" />
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider5.jpg" alt="Slide 2" className="slider_img_graph" />
                                     <div className="slide-text">
                                         <h2 className="slider_name">Tech Surge</h2>
                                         <p className="slider_p-wapper">
@@ -879,7 +779,7 @@ function Home() {
 
                                 <SwiperSlide>
                                 <div className="swiper-slide slider_img_graph-s ">   
-                                    <img className="slider_img_graph" src="./images/slider2.jpg" alt="Slide 3" />
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider2.jpg" alt="Slide 3" className="slider_img_graph" />
                                     <div className="slide-text">
                                         <h2 className="slider_name">Crypto Waves</h2>
                                         <p className="slider_p-wapper">
@@ -892,7 +792,7 @@ function Home() {
 
                                 <SwiperSlide>
                                 <div className="swiper-slide slider_img_graph-s ">   
-                                    <img className="slider_img_graph" src="./images/slider3.jpg" alt="Slide 4" />
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider3.jpg" alt="Slide 4" className="slider_img_graph" />
                                     <div className="slide-text">
                                         <h2 className="slider_name">Energy Upswing</h2>
                                         <p className="slider_p-wapper">
@@ -905,7 +805,7 @@ function Home() {
 
                                 <SwiperSlide>
                                 <div className="swiper-slide slider_img_graph-s ">   
-                                    <img className="slider_img_graph" src="./images/slider4.jpg" alt="Slide 5" />
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider4.jpg" alt="Slide 5" className="slider_img_graph" />
                                     <div className="slide-text">
                                         <h2 className="slider_name">Retail Revival</h2>
                                         <p className="slider_p-wapper">
@@ -917,16 +817,16 @@ function Home() {
                                 </SwiperSlide>
 
                                 <SwiperSlide>
-                                    <div className="swiper-slide slider_img_graph-s   ">   
-                                        <img className="slider_img_graph" src="./images/slider6.jpg" alt="Slide 6" />
-                                        <div className="slide-text">
-                                            <h2 className="slider_name">Healthcare Growth</h2>
-                                            <p className="slider_p-wapper">
-                                                The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
-                                                These visualizations demonstrate an extension of a previously established positive.
-                                            </p>
-                                        </div>
+                                <div className="swiper-slide slider_img_graph-s ">   
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider6.jpg" alt="Slide 6" className="slider_img_graph" />
+                                    <div className="slide-text">
+                                        <h2 className="slider_name">Healthcare Growth</h2>
+                                        <p className="slider_p-wapper">
+                                            The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
+                                            These visualizations demonstrate an extension of a previously established positive.
+                                        </p>
                                     </div>
+                                </div>
                                 </SwiperSlide>
 
                                 <div className="arrows_left-right">
@@ -1134,7 +1034,7 @@ function Home() {
                         <div className="grid_link">
                             <div className="grid_first">
                                 <div className="img_gr_f">
-                                    <img src="./images/Logo.png" alt="Logo" />
+                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/Logo.png" alt="Logo" />
                                 </div>
                             </div>
                             <div className="grid_second">
