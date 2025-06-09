@@ -58,6 +58,7 @@ function Home() {
     });
     const [formErrors, setFormErrors] = useState({});
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [formStatus, setFormStatus] = useState({ type: '', message: '' });
 
     const animateSlideOut = useCallback((index) => {
         const img = document.querySelectorAll('.slide')[index]?.querySelector("img.Img_slider-img");
@@ -323,37 +324,35 @@ function Home() {
         };
     }, [showDemoModal, closeDemoModal]);
 
-    const validateName = (name) => {
+    const validateName = useCallback((name) => {
         if (!name.trim()) return 'Name is required';
         if (name.length < 2) return 'Name must be at least 2 characters long';
         return '';
-    };
+    }, []);
 
-    const validateEmail = (email) => {
+    const validateEmail = useCallback((email) => {
         if (!email) return 'Email is required';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) return 'Please enter a valid email address';
         return '';
-    };
+    }, []);
 
-    const validatePhone = (phone) => {
+    const validatePhone = useCallback((phone) => {
         if (!phone) return '';
         const phoneRegex = /^[6-9]\d{9}$/;
         if (!phoneRegex.test(phone)) {
             return 'Phone number must start with 6, 7, 8, or 9 and be 10 digits long';
         }
         return '';
-    };
+    }, []);
 
-    const validateMessage = (message) => {
+    const validateMessage = useCallback((message) => {
         const wordCount = message.trim().split(/\s+/).length;
         if (wordCount < 10) return 'Message must contain at least 10 words';
         return '';
-    };
+    }, []);
 
-    const [formStatus, setFormStatus] = useState({ type: '', message: '' });
-
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         const errors = {};
         
         const nameError = validateName(formData.name);
@@ -370,7 +369,7 @@ function Home() {
         
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
-    };
+    }, [formData, validateName, validateEmail, validatePhone, validateMessage]);
 
     const handleInputChange = useCallback((e) => {
         const { name, value } = e.target;
@@ -527,7 +526,7 @@ function Home() {
             <header className="Header">
                 <nav className="Nav_bar">
                     <div className="Logo">
-                        <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/Logo.png" alt="Astrolite Logo" className="Logo_img" />
+                        <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/Logo.png" alt="Astrolite" className="Logo_img" />
                     </div>
                     <div className="hamburger-menu" onClick={toggleMenu}>
                         <i className={`fa ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
