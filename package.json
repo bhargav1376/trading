@@ -2,7 +2,7 @@
   "name": "trading",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://bhargav1376.github.io/bhargav1376/trading.git",
+  "homepage": "https://bhargav1376.github.io/trading",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

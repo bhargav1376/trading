@@ -749,10 +749,19 @@ function Home() {
                                     950: { slidesPerView: 3 },
                                 }}
                                 className="slide-content"
+                                onSwiper={(swiper) => {
+                                    // Initialize the slider
+                                    setTimeout(() => {
+                                        const animation = document.querySelector('.silder_show-animation');
+                                        if (animation) {
+                                            animation.classList.add('Slidershow');
+                                        }
+                                    }, 100);
+                                }}
                             >
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">    
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/sildercopy.jpg" alt="Slide 1" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider3.jpg" alt="Slide 1" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Market Momentum</h2>
                                             <p className="slider_p-wapper">
@@ -842,27 +851,6 @@ function Home() {
                     </div>
                 </div>
             </section>
-
-            {useEffect(() => {
-                const section = document.querySelector(".Slider_section-detail");
-                if (!section) return;
-
-                const elementsToAnimate = section.querySelectorAll(".silder_show-animation");
-
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                elementsToAnimate.forEach((el) => el.classList.add("Slidershow"));
-                            }
-                        });
-                    },
-                    { threshold: 0.3, once: true }
-                );
-
-                observer.observe(section);
-                return () => observer.disconnect();
-            }, [])}
 
             <section className="Contact_us-section" ref={contactSectionRef}>
                 <div className="Contact-get">

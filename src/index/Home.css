@@ -1444,128 +1444,121 @@ animation-fill-mode: backwards;
 /* Slider Start here  */
 section.Slider_section-detail {
     padding: 50px 0;
-    background: var(--white);
+    background: #f5f5f5;
     overflow: hidden;
 }
 
-div.Slider_section {
+.Slider_section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-div.slider_show-width {
+.slider_show-width {
     position: relative;
-    overflow: hidden;
+    width: 100%;
 }
 
-div.silder_show-animation {
+.silder_show-animation {
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
 }
 
-div.silder_show-animation.Slidershow {
+.silder_show-animation.Slidershow {
     opacity: 1;
     transform: translateY(0);
 }
 
-.slider_img_graph-s {
-    background: var(--white);
+.swiper-slide {
+    background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
-.slider_img_graph-s:hover {
+.swiper-slide:hover {
     transform: translateY(-5px);
 }
 
-.swiper-slide {
-    padding: 20px;
+.slider_img_graph-s {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
 }
 
-.swiper-slide-active {
+.slider_img_graph {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.slider_img_graph-s:hover .slider_img_graph {
     transform: scale(1.05);
-    z-index: 1;
 }
 
-.left-prev,
-.right-prev {
-    background: var(--white);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+.slide-text {
+    padding: 20px;
+    background: #fff;
+}
+
+.slider_name {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.slider_p-wapper {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
 }
 
 .arrows_left-right {
     position: absolute;
     top: 50%;
-    left: 0;
-    right: 0;
+    width: 100%;
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
     z-index: 10;
-    pointer-events: none;
 }
 
 .swiper-button {
-    pointer-events: auto;
-}
-
-.swiper-button button {
-    background: var(--white);
-    border: none;
+    background: rgba(255, 255, 255, 0.9);
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-.swiper-button button:hover {
-    background: var(--textbg);
-    color: var(--white);
+.swiper-button:hover {
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-img.slider_img_graph {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.slide-text {
-    padding: 20px;
-    background: var(--white);
-}
-
-h2.slider_name {
+.left-prev, .right-prev {
+    background: none;
+    border: none;
     font-size: 1.5rem;
-    color: var(--black);
-    margin-bottom: 10px;
-    font-family: "Poppins", sans-serif;
-}
-
-p.slider_p-wapper {
-    font-size: 0.9rem;
-    color: var(--rgbawhite);
-    line-height: 1.6;
-    font-family: "Karla", sans-serif;
+    color: #333;
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .swiper-pagination {
@@ -1576,36 +1569,24 @@ p.slider_p-wapper {
 .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
-    background: var(--rgbawhite);
-    opacity: 0.5;
-    transition: all 0.3s ease;
+    background: #ccc;
+    opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-    background: var(--textbg);
-    opacity: 1;
-    transform: scale(1.2);
+    background: #007bff;
 }
 
-@media screen and (max-width: 768px) {
-    .swiper-slide-active {
-        transform: scale(1);
+@media (max-width: 768px) {
+    .slider_img_graph-s {
+        height: 250px;
     }
-    
-    .arrows_left-right {
-        padding: 0 10px;
-    }
-    
-    .swiper-button button {
-        width: 35px;
-        height: 35px;
-    }
-    
-    h2.slider_name {
+
+    .slider_name {
         font-size: 1.2rem;
     }
-    
-    p.slider_p-wapper {
+
+    .slider_p-wapper {
         font-size: 0.8rem;
     }
 }
