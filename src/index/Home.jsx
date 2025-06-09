@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import './Home.css';
 import './darkmode.css';
 import 'swiper/css';
@@ -58,18 +57,17 @@ function Home() {
         message: ''
     });
     const [formErrors, setFormErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const animateSlideOut = (index) => {
+    const animateSlideOut = useCallback((index) => {
         const img = document.querySelectorAll('.slide')[index]?.querySelector("img.Img_slider-img");
         const textEls = document.querySelectorAll('.slide')[index]?.querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
 
         if (img) img.classList.remove("show");
         textEls?.forEach(el => el.classList.remove("show"));
-    };
+    }, []);
 
-    const animateSlideIn = (index) => {
+    const animateSlideIn = useCallback((index) => {
         const img = document.querySelectorAll('.slide')[index]?.querySelector("img.Img_slider-img");
         const textEls = document.querySelectorAll('.slide')[index]?.querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
 
@@ -77,7 +75,7 @@ function Home() {
         setTimeout(() => {
             textEls?.forEach(el => el.classList.add("show"));
         }, 600);
-    };
+    }, []);
 
     const showSlide = useCallback((index) => {
         animateSlideOut(currentSlide);
@@ -388,7 +386,6 @@ function Home() {
 
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
-        setIsSubmitting(true);
         
         if (!validateForm()) {
             setFormStatus({ type: 'error', message: 'Please correct the errors in the form' });
@@ -424,10 +421,8 @@ function Home() {
         } catch (error) {
             console.error('Form submission error:', error);
             setFormStatus({ type: 'error', message: 'Failed to submit form. Please try again.' });
-        } finally {
-            setIsSubmitting(false);
         }
-    }, [formData]);
+    }, [formData, validateForm]);
 
     useEffect(() => {
         const section = contactSectionRef.current;
@@ -606,7 +601,7 @@ function Home() {
                                             <h1 className="Pro_trad">{slide.title}</h1>
                                             <p className="Analyze_pro">{slide.desc}</p>
                                             <div className="connect_more">
-                                                <a href="#" className="btn-txt">Connect</a>
+                                                <button className="btn-txt" onClick={() => window.location.href = '/contact'}>Connect</button>
                                             </div>
                                         </div>
                                     </div>
