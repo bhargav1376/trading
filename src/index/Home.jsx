@@ -595,7 +595,7 @@ function Home() {
                                 <div className="grid_img">
                                     <div className="Img_slide">
                                         <div className="Img_overlay"></div>
-                                        <img src={slide.img} alt={`Slider Image ${index + 1}`} className="Img_slider-img" />
+                                        <img src={slide.img} alt={`Slider ${index + 1}`} className="Img_slider-img" />
                                         <div className="matter_img">
                                             <h1 className="Pro_trad">{slide.title}</h1>
                                             <p className="Analyze_pro">{slide.desc}</p>
