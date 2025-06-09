@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaBars, FaTimes, FaUser, FaBell, FaSearch } from 'react-icons/fa';
-import './Profile.css'; 
-import Logo from '../../index/images/Logo.png'; 
+import './Profile.css';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null); // Assuming user data is needed

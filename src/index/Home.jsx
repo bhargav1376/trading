@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import './darkmode.css';
@@ -68,6 +68,18 @@ function Home() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const sliderWrapperRef = useRef(null);
     const slidesRef = useRef([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(null);
+    const [showDemoModal, setShowDemoModal] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+    });
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const animateSlideOut = (index) => {
         const img = slidesRef.current[index]?.querySelector("img.Img_slider-img");
@@ -88,7 +100,7 @@ function Home() {
     };
     const currentSlideRef = useRef(0);
 
-    const showSlide = (index) => {
+    const showSlide = useCallback((index) => {
         animateSlideOut(currentSlideRef.current);
     
         setTimeout(() => {
@@ -101,14 +113,14 @@ function Home() {
                 }, 100);
             }
         }, 500);
-    };
+    }, []);
     
     
 
-    const handleNextSlide = () => {
+    const handleNextSlide = useCallback(() => {
         const nextIndex = (currentSlideRef.current + 1) % slidesRef.current.length;
         showSlide(nextIndex);
-    };
+    }, [showSlide]);
     
 
     const handlePrevSlide = () => {
@@ -238,9 +250,12 @@ function Home() {
     }, []);
 
     // Modal state for indicators
-    const [openModal, setOpenModal] = useState(null);
-    const handleOpenModal = (modalId) => setOpenModal(modalId);
-    const handleCloseModal = () => setOpenModal(null);
+    const handleOpenModal = useCallback((modalId) => {
+        setOpenModal(modalId);
+    }, []);
+    const handleCloseModal = useCallback(() => {
+        setOpenModal(null);
+    }, []);
     const handleModalClick = (e) => {
         if (e.target.classList.contains('modal')) {
             handleCloseModal();
@@ -281,10 +296,6 @@ function Home() {
 
     // Find the currently open indicator
     const activeIndicator = indicators.find(ind => ind.id === openModal);
-
-    // Demo section state
-    const [showDemoModal, setShowDemoModal] = useState(false);
-    const demoModalRef = useRef(null);
 
     // Demo section animation
     useEffect(() => {
@@ -388,17 +399,7 @@ function Home() {
     };
 
     // Form state
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone_number: '',
-        subject: '',
-        message: ''
-    });
-
-    const [formErrors, setFormErrors] = useState({});
     const [formStatus, setFormStatus] = useState({ type: '', message: '' });
-    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const validateForm = () => {
         const errors = {};
@@ -409,56 +410,31 @@ function Home() {
         const emailError = validateEmail(formData.email);
         if (emailError) errors.email = emailError;
         
-        const phoneError = validatePhone(formData.phone_number);
-        if (phoneError) errors.phone_number = phoneError;
+        const phoneError = validatePhone(formData.phone);
+        if (phoneError) errors.phone = phoneError;
         
         const messageError = validateMessage(formData.message);
         if (messageError) errors.message = messageError;
-        
-        if (!formData.subject) errors.subject = 'Please select a subject';
         
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
     };
 
-    const handleInputChange = (e) => {
+    const handleInputChange = useCallback((e) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
+        setFormData(prev => ({
+            ...prev,
             [name]: value
         }));
-        
-        // Validate the field immediately
-        let error = '';
-        switch (name) {
-            case 'name':
-                error = validateName(value);
-                break;
-            case 'email':
-                error = validateEmail(value);
-                break;
-            case 'phone_number':
-                error = validatePhone(value);
-                break;
-            case 'message':
-                error = validateMessage(value);
-                break;
-            case 'subject':
-                error = !value ? 'Please select a subject' : '';
-                break;
-            default:
-                break;
-        }
-
-        // Update errors state
         setFormErrors(prev => ({
             ...prev,
-            [name]: error
+            [name]: ''
         }));
-    };
+    }, []);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         
         if (!validateForm()) {
             setFormStatus({ type: 'error', message: 'Please correct the errors in the form' });
@@ -484,8 +460,7 @@ function Home() {
                 setFormData({
                     name: '',
                     email: '',
-                    phone_number: '',
-                    subject: '',
+                    phone: '',
                     message: ''
                 });
                 setFormErrors({});
@@ -495,8 +470,10 @@ function Home() {
         } catch (error) {
             console.error('Form submission error:', error);
             setFormStatus({ type: 'error', message: 'Failed to submit form. Please try again.' });
+        } finally {
+            setIsSubmitting(false);
         }
-    };
+    }, [formData]);
 
     // Contact section animation
     useEffect(() => {
@@ -581,13 +558,10 @@ function Home() {
         setShowLoginDiv(false);
     };
 
-    // Add state for menu toggle
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    // Add menu toggle handler
-    const toggleMenu = () => {
+    // Add close handler
+    const toggleMenu = useCallback(() => {
         setIsMenuOpen(!isMenuOpen);
-    };
+    }, [isMenuOpen]);
 
     // Close menu when clicking outside
     useEffect(() => {
@@ -752,9 +726,6 @@ function Home() {
                 </div>
             )}
 
-{/* demo section starts here */}
-
-      
             <section className="Demo_section" ref={demoSectionRef}>
                 <div className="Demo_section-wr">
                     <div className="Demo_img-wr">
@@ -852,155 +823,148 @@ function Home() {
                     </div>
                 </div>
             )}
-  {/* demo section ends here */}
 
+            <section className="Slider_section-detail">
+                <div className="Slider_section">
+                    <div className="slider_show-width">
+                        <div className="silder_show-animation">
+                            <Swiper
+                                modules={[Pagination, Navigation]}
+                                slidesPerView={3}
+                                spaceBetween={25}
+                                loop={true}
+                                centeredSlides={true}
+                                grabCursor={true}
+                                pagination={{
+                                    el: '.swiper-pagination',
+                                    clickable: true,
+                                    dynamicBullets: true,
+                                }}
+                                navigation={{
+                                    nextEl: '.right-prev',
+                                    prevEl: '.left-prev',
+                                }}
+                                breakpoints={{
+                                    0: { slidesPerView: 1 },
+                                    520: { slidesPerView: 2 },
+                                    950: { slidesPerView: 3 },
+                                }}
+                                className="slide-content"
+                            >
+                                <SwiperSlide>
+                                <div className="swiper-slide slider_img_graph-s ">    
+                                    <img className="slider_img_graph" src="./images/slider1.jpg" alt="Slide 1" />
+                                    <div className="slide-text">
+                                        <h2 className="slider_name">Market Momentum</h2>
+                                        <p className="slider_p-wapper">
+                                            Accelerating growth with intermittent pullbacks—ideal for stock‑performance dashboards. 
+                                            Robust trading volumes confirm bullish conviction, while technical indicators highlight healthy consolidation phases.
+                                        </p>
+                                    </div>
+                                </div>  
+                                </SwiperSlide>
 
-     {/* slider section starts here */}
-  <section className="Slider_section-detail">
-    <div className="Slider_section">
-      <div className="slider_show-width">
-        <div className="silder_show-animation">
-          <Swiper
-            modules={[Pagination, Navigation]}
-            slidesPerView={3}
-            spaceBetween={25}
-            loop={true}
-            centeredSlides={true}
-            grabCursor={true}
-            pagination={{
-              el: '.swiper-pagination',
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            navigation={{
-              nextEl: '.right-prev',
-              prevEl: '.left-prev',
-            }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              520: { slidesPerView: 2 },
-              950: { slidesPerView: 3 },
-            }}
-            className="slide-content"
-          >
-            <SwiperSlide>
-            <div className="swiper-slide slider_img_graph-s ">    
-              <img className="slider_img_graph" src="./images/slider1.jpg" alt="Slide 1" />
-              <div className="slide-text">
-                <h2 className="slider_name">Market Momentum</h2>
-                <p className="slider_p-wapper">
-                  Accelerating growth with intermittent pullbacks—ideal for stock‑performance dashboards. 
-                  Robust trading volumes confirm bullish conviction, while technical indicators highlight healthy consolidation phases.
-                </p>
-              </div>
-            </div>  
-            </SwiperSlide>
+                                <SwiperSlide>
+                                <div className="swiper-slide slider_img_graph-s ">   
+                                    <img className="slider_img_graph" src="./images/slider5.jpg" alt="Slide 2" />
+                                    <div className="slide-text">
+                                        <h2 className="slider_name">Tech Surge</h2>
+                                        <p className="slider_p-wapper">
+                                            These charts vividly depict a strong and sustained upward trend that is clearly evident within the technology sector.
+                                            The visual representation showcases a consistent pattern of growth.
+                                        </p>
+                                    </div>
+                                </div>
+                                </SwiperSlide>
 
-            <SwiperSlide>
-            <div className="swiper-slide slider_img_graph-s ">   
-              <img className="slider_img_graph" src="./images/slider5.jpg" alt="Slide 2" />
-              <div className="slide-text">
-                <h2 className="slider_name">Tech Surge</h2>
-                <p className="slider_p-wapper">
-                  These charts vividly depict a strong and sustained upward trend that is clearly evident within the technology sector.
-                  The visual representation showcases a consistent pattern of growth.
-                </p>
-              </div>
-            </div>
-            </SwiperSlide>
+                                <SwiperSlide>
+                                <div className="swiper-slide slider_img_graph-s ">   
+                                    <img className="slider_img_graph" src="./images/slider2.jpg" alt="Slide 3" />
+                                    <div className="slide-text">
+                                        <h2 className="slider_name">Crypto Waves</h2>
+                                        <p className="slider_p-wapper">
+                                            The "Crypto Waves" charts visually represent the often volatile price fluctuations characteristic of the cryptocurrency market.
+                                            Despite these frequent ups and downs, the overall trend depicted in the visualizations.
+                                        </p>
+                                    </div>
+                                </div>
+                                </SwiperSlide>
 
-            <SwiperSlide>
-            <div className="swiper-slide slider_img_graph-s ">   
-              <img className="slider_img_graph" src="./images/slider2.jpg" alt="Slide 3" />
-              <div className="slide-text">
-                <h2 className="slider_name">Crypto Waves</h2>
-                <p className="slider_p-wapper">
-                  The "Crypto Waves" charts visually represent the often volatile price fluctuations characteristic of the cryptocurrency market.
-                  Despite these frequent ups and downs, the overall trend depicted in the visualizations.
-                </p>
-              </div>
-            </div>
-            </SwiperSlide>
+                                <SwiperSlide>
+                                <div className="swiper-slide slider_img_graph-s ">   
+                                    <img className="slider_img_graph" src="./images/slider3.jpg" alt="Slide 4" />
+                                    <div className="slide-text">
+                                        <h2 className="slider_name">Energy Upswing</h2>
+                                        <p className="slider_p-wapper">
+                                            The "Energy Upswing" charts illustrate a noticeable and consistent recovery within both oil and gas markets.
+                                            These visualizations clearly demonstrate a steady climb in market indicators following a previously experienced.
+                                        </p>
+                                    </div>
+                                </div>
+                                </SwiperSlide>
 
-            <SwiperSlide>
-            <div className="swiper-slide slider_img_graph-s ">   
-              <img className="slider_img_graph" src="./images/slider3.jpg" alt="Slide 4" />
-              <div className="slide-text">
-                <h2 className="slider_name">Energy Upswing</h2>
-                <p className="slider_p-wapper">
-                  The "Energy Upswing" charts illustrate a noticeable and consistent recovery within both oil and gas markets.
-                  These visualizations clearly demonstrate a steady climb in market indicators following a previously experienced.
-                </p>
-              </div>
-            </div>
-            </SwiperSlide>
+                                <SwiperSlide>
+                                <div className="swiper-slide slider_img_graph-s ">   
+                                    <img className="slider_img_graph" src="./images/slider4.jpg" alt="Slide 5" />
+                                    <div className="slide-text">
+                                        <h2 className="slider_name">Retail Revival</h2>
+                                        <p className="slider_p-wapper">
+                                            The "Retail Revival" charts clearly depict a significant rebound in consumer spending activities.
+                                            These visuals illustrate a positive upturn in retail markets corresponding with the reopening of various sectors.
+                                        </p>
+                                    </div>
+                                </div>
+                                </SwiperSlide>
 
-            <SwiperSlide>
-            <div className="swiper-slide slider_img_graph-s ">   
-              <img className="slider_img_graph" src="./images/slider4.jpg" alt="Slide 5" />
-              <div className="slide-text">
-                <h2 className="slider_name">Retail Revival</h2>
-                <p className="slider_p-wapper">
-                  The "Retail Revival" charts clearly depict a significant rebound in consumer spending activities.
-                  These visuals illustrate a positive upturn in retail markets corresponding with the reopening of various sectors.
-                </p>
-              </div>
-            </div>
-            </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="swiper-slide slider_img_graph-s   ">   
+                                        <img className="slider_img_graph" src="./images/slider6.jpg" alt="Slide 6" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Healthcare Growth</h2>
+                                            <p className="slider_p-wapper">
+                                                The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
+                                                These visualizations demonstrate an extension of a previously established positive.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
 
-            <SwiperSlide>
-              <div className="swiper-slide slider_img_graph-s   ">   
-                <img className="slider_img_graph" src="./images/slider6.jpg" alt="Slide 6" />
-                <div className="slide-text">
-                  <h2 className="slider_name">Healthcare Growth</h2>
-                <p className="slider_p-wapper">
-                  The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
-                  These visualizations demonstrate an extension of a previously established positive.
-                </p>
-              </div>
-            </div>
-            </SwiperSlide>
+                                <div className="arrows_left-right">
+                                    <div className="swiper-button">
+                                        <button className="left-prev" onClick={() => handlePrevSlide()}><i className="fa fa-angle-left" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div className="swiper-button">
+                                        <button className="right-prev" onClick={() => handleNextSlide()}><i className="fa fa-angle-right" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                                <div className="swiper-pagination"></div>
+                            </Swiper>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <div className="arrows_left-right">
-              <div className="swiper-button">
-                <button className="left-prev" onClick={() => handlePrevSlide()}><i className="fa fa-angle-left" aria-hidden="true"></i></button>
-              </div>
-              <div className="swiper-button">
-                <button className="right-prev" onClick={() => handleNextSlide()}><i className="fa fa-angle-right" aria-hidden="true"></i></button>
-              </div>
-            </div>
-            <div className="swiper-pagination"></div>
-          </Swiper>
-        </div>
-      </div>
-    </div>
-  </section>
+            {useEffect(() => {
+                const section = document.querySelector(".Slider_section-detail");
+                if (!section) return;
 
-     {/* slider section ends here */}
+                const elementsToAnimate = section.querySelectorAll(".silder_show-animation");
 
-  {/* Add slider animation effect */}
-  {useEffect(() => {
-    const section = document.querySelector(".Slider_section-detail");
-    if (!section) return;
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                elementsToAnimate.forEach((el) => el.classList.add("Slidershow"));
+                            }
+                        });
+                    },
+                    { threshold: 0.3, once: true }
+                );
 
-    const elementsToAnimate = section.querySelectorAll(".silder_show-animation");
+                observer.observe(section);
+                return () => observer.disconnect();
+            }, [])}
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            elementsToAnimate.forEach((el) => el.classList.add("Slidershow"));
-          }
-        });
-      },
-      { threshold: 0.3, once: true }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [])}
-
-  {/* contact section starts here */}
             <section className="Contact_us-section" ref={contactSectionRef}>
                 <div className="Contact-get">
                     <div className="Contact-touch">
@@ -1054,13 +1018,13 @@ function Home() {
                                         <div className="from-inputs number-input">
                                             <input 
                                                 type="tel" 
-                                                className={`form-control ${formErrors.phone_number ? 'error' : ''}`}
-                                                name="phone_number"
-                                                value={formData.phone_number}
+                                                className={`form-control ${formErrors.phone ? 'error' : ''}`}
+                                                name="phone"
+                                                value={formData.phone}
                                                 onChange={handleInputChange}
                                                 placeholder="Enter phone Number (Optional)" 
                                             />
-                                            {formErrors.phone_number && <span className="error-message">{formErrors.phone_number}</span>}
+                                            {formErrors.phone && <span className="error-message">{formErrors.phone}</span>}
                                         </div>
                                         <div className="form-group subject-input">
                                             <select 
@@ -1107,9 +1071,7 @@ function Home() {
                     </div>
                 </div>
             </section>
-            {/* contact section ends here */}
 
-            {/* About us start here  */}
             <section id="section_Aboutus" className="Section_About" ref={aboutSectionRef}>
             <div className="about_con">
                 <div className="About_us-wid">
@@ -1142,9 +1104,7 @@ function Home() {
                 </div>
             </div>
             </section>
-            {/* About us start here  */}
 
-            {/* footer section start here */}
             <footer className="footer">
                 <div className="link_uyi">
                     <div className="bubble-container">
@@ -1228,18 +1188,15 @@ function Home() {
                     </div>
                 </div>
             </footer>
-            {/* footer section ends here */}
 
-            {/* scroll btn start here   */}
             <div className="scroll_btn">
                 <div className="btn_top">
                     <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} id="scrollmyBtn" title="Go to top">↑</button>
                 </div>
             </div>
             <SuccessModal />
-            {/* scroll btn end here   */}
 
-              {showLoginDiv && (
+            {showLoginDiv && (
                 <div className='ab-login'>
                     <div className='close_btn'>
                         <button className='Close_btn_Sl' onClick={handleCloseLogin}>X</button>
@@ -1254,8 +1211,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
-              )}
-
+            )}
 
         </div>
     );

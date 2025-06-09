@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 
@@ -13,33 +13,25 @@ const Admin = () => {
     const [editForm, setEditForm] = useState({});
     const [isAdmin, setIsAdmin] = useState(false);
 
-    useEffect(() => {
-        // Check if user is admin
-        checkAdminStatus();
-        // Fetch all tables
-        fetchTables();
-    }, []);
+    const checkAdminStatus = useCallback(() => {
+        const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
+        if (!userData.isAdmin) {
+            navigate('/signin');
+        } else {
+            setIsAdmin(true);
+        }
+        setLoading(false);
+    }, [navigate]);
 
     useEffect(() => {
+        document.title = 'Trading | Admin Dashboard';
         checkAdminStatus();
     }, [checkAdminStatus]);
 
-    const checkAdminStatus = async () => {
-        try {
-            const response = await fetch('http://localhost:3030/api/check-admin', {
-                credentials: 'include'
-            });
-            const data = await response.json();
-            if (!data.isAdmin) {
-                navigate('/signin');
-            } else {
-                setIsAdmin(true);
-            }
-        } catch (error) {
-            console.error('Error checking admin status:', error);
-            navigate('/signin');
-        }
-    };
+    useEffect(() => {
+        // Fetch all tables
+        fetchTables();
+    }, []);
 
     const fetchTables = async () => {
         try {
@@ -140,6 +132,10 @@ const Admin = () => {
             }
         }
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     if (!isAdmin) {
         return null;
