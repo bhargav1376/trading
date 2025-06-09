@@ -1,0 +1,222 @@
+div.Login-p{
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+div.Login_page{
+    width: 100%;
+    margin: auto;
+}
+
+div.div_flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+img.img-src-login{
+    mix-blend-mode: multiply;
+    width: 100%;
+    height: 100vh;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+div.Submit_Form-login {
+    display: flex;
+    width: 100%;
+    /* background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px);  */
+    border-radius: 10px; 
+    /* padding: 20px;  */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  */
+}
+
+/* div.Image_Signup{
+    width: 100%;
+} */
+
+
+#spass,#uid{
+color: #000;
+    font-weight: 600;
+    width: 100%;
+    padding: 10px 30px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    outline: none;
+    border-bottom: 2px solid #123367 ; 
+    border-radius: 5px;
+    padding-left: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+a.Login_Page{
+    z-index: 99;
+    /* position: absolute; */
+ text-decoration: none;
+ font-size: 18px;
+ margin-left: 2px;
+ text-align: center;
+ color: #000;
+}
+
+a.Login_Page:hover{
+    color: #000;
+    text-decoration: underline;
+}
+
+div.Rem_me{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 7px;
+    margin-right: 10px;
+    margin-bottom: 7px;
+    margin-top: 5px;
+}
+div.Rem{
+    display: flex;
+    align-items: center;
+}
+p.Remember{
+    margin-left: 5px;
+    color: #000;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+a.Forgot_page{
+    text-decoration: none;
+    color: #000;
+       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+a.Forgot_page:hover{
+    color: #000;
+}
+.Eye_BTN {
+    position: absolute;
+    right: 58px;
+    top: 54.3%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+  }
+    
+div.Check_box_show{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+p.Show_new_password{
+    margin-left: 5px;
+}
+
+button.Btn_submit {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #3E474B;
+    color: #fff;
+    outline: none;
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-family: serif;
+}
+
+button.Btn_submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1), rgba(0,0,0,0.1));
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+button.Btn_submit:hover::before {
+    right: 0;
+}
+
+div.img_src-lo{
+    width: 100%;
+    margin: auto;
+}
+
+.error-popup {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ff4444;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 4s ease-in-out;
+    text-align: center;
+    min-width: 200px;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+.error-msg {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.eromsg {
+    color: #ff4444;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.Input_name input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    transition: border-bottom 0.3s ease;
+}
+
+#spass.error,
+#uid.error {
+    border-bottom: 2px solid #ff4444 !important;
+}

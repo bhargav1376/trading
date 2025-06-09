@@ -1,0 +1,371 @@
+.otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.otp-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.otp-form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.otp-form p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.timer {
+    color: #f44336 !important;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.otp-input-container {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.otp-input-otp {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.otp-input-otp:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.otp-input-otp.error,
+.otp-input-otp.error:focus {
+    border: 2px solid #e74c3c !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.2) !important;
+}
+
+.otp-input::placeholder {
+    letter-spacing: normal;
+    font-size: 1rem;
+}
+
+.password-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.password-inputs input {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.password-inputs input:focus {
+    border-color: #4CAF50;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 1rem;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.resend-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.resend-button:hover {
+    background-color: #1976D2;
+}
+
+.resend-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.Signupotp_image-otp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('./images/Backgrondotp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.otp-container-signupotp {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 50%;
+    padding: 20px;
+    margin-right: 50px;
+}
+
+.otp-box-signupotp {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h2.otp-verification-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otp-info {
+    text-align: center;
+    color: #34495e;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.spam-note {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 14px;
+    margin: 20px 0;
+    padding: 12px;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otp-input-container-signupotp {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.otp-input-container-signupotp .otp-input-otp {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-bottom: 2px solid #18181A;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.otp-input-container-signupotp .otp-input-otp:focus {
+    border: none;
+    border-bottom: 2px solid #3498db;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.otp-input-container-signupotp .otp-input-otp.error {
+    border: none;
+    border-bottom: 2px solid #e74c3c !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.2) !important;
+}
+
+.otp-input-container-signupotp .otp-input-otp.error:focus {
+    border: none;
+    border-bottom: 2px solid #e74c3c !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+}
+
+.timer-section {
+    right: 20%;
+    margin-right: 50px;
+    text-align: end;
+    color: #7f8c8d;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 15px 0;
+}
+
+.resend-text {
+    background: none;
+    border: none;
+    color: #3498db;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.resend-text:hover:not(:disabled) {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.resend-text:disabled {
+    color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+button.Btn_submit-signupotp {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+}
+
+button.Btn_submit-signupotp:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+button.Btn_submit-signupotp:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.popup-message-signupotp {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    min-width: 200px;
+}
+
+.popup-message-signupotp.error {
+    background-color: #e74c3c;
+    border-left: 4px solid #c0392b;
+}
+
+.popup-message-signupotp.success {
+    background-color: #2ecc71;
+    border-left: 4px solid #27ae60;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+}
+
+@media (max-width: 768px) {
+    .otp-container-signupotp {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .otp-box-signupotp {
+        padding: 25px;
+    }
+
+    .otp-input {
+        width: 40px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    h2.otp-verification-title {
+        font-size: 24px;
+    }
+} 

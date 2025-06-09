@@ -1,0 +1,565 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+/* 
+
+#86D1E3
+
+#F2F2F2
+
+#4D96C9
+*/
+body{
+    /* background-image: url(KlxIwM.webp); */
+    /* background: linear-gradient(135deg, rgba(15, 41, 82, 0.5) 5%, rgba(15, 41, 82, 0.5) 17%,#F2F2F2 30%,#F2F2F2 40%,#F2F2F2 62.5%, rgba(15, 41, 82, 0.6) 90%); */
+     background-position: 100%;
+     height: 100%;
+     background-size: cover;
+     margin: 0%;
+     background-attachment: fixed;
+     transition: all 0.3s ease;
+}
+div.Signup{
+    width: 100%;
+    margin: auto;
+}
+div.Signup_page{
+    width: 100%;
+    margin: auto;
+}
+div.Signup_details{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+}
+div.Details_form {
+    width: 100%; 
+    padding: 0px;
+    border-radius: 5px;
+    background-color: transparent;
+    box-sizing: border-box;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+div.Details_form_login{
+    padding: 0px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 6%;
+}
+div.Details_form_forgot{
+    width: 100%;  
+}
+div.Details_form_reset{
+    width: 100%;  
+}
+div.Submit_Form {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    /* background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(40px);  */
+    border-radius: 10px; 
+    /* padding: 20px;  */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  */
+    /* align-items: center; */
+    align-items: stretch;
+}
+.Img_src {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img-src {
+    width: 100%; /* Ensure the image scales correctly */
+    height: 100%; /* Make the height dynamic */
+    /* object-fit: cover; Keep the image aspect ratio */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+div.Name_Flex {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* div.gap_m{
+    margin-left: -10px;
+} */
+
+/* div.Image_Signup{
+    width: 100%;
+} 
+ div.Name_Flex{
+    /* background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.59);
+    padding: 30px 45px;
+    border-radius: 10px; 
+ }*/
+
+/* div.Signup_from_flex{
+    display: flex; 
+     gap: 10px;  
+}*/
+div.Login_from_flex{
+    display: block;
+    gap: 10px; 
+    background-color: transparent;
+    border-top-left-radius: 5px;
+     border-bottom-left-radius:5px ;
+     padding-left: 10px;
+     margin-bottom: 5px;
+}
+h1.tr{
+    color: #142539;
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+p.helo {
+  font-size: 16px ;
+  margin-bottom: 10px;
+  color: #142539;
+  word-spacing: 2px;
+  line-height: 22px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 10px;
+
+  }
+  p.helo::before {
+    content: "•";
+    margin-right: 0px;
+  }
+  
+
+h1.Name_Tag {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 45px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 900;
+    /* color: rgba(0, 0, 0, .8); */
+    color: #123367;
+    font-weight: 700; 
+    background-clip: text; 
+    -webkit-background-clip: text;
+    /* text-transform: uppercase;  #142539 */
+}
+
+form.Details_submit{
+padding: 10px 15px;
+padding-bottom:30px;
+}
+/* div.Label_text{
+    width: 100%;
+    margin-bottom: 3px;
+    margin-left: 5px;
+} */
+ div.mail{
+  position: absolute;
+  margin-top: -46px;
+  font-size: 18px;
+  margin-left: 15px;
+  color: #142539;
+ }
+ div.mail_p{
+    position: absolute;
+  margin-top: -46px;
+  font-size: 18px;
+  margin-left: 15px;
+  color: #142539;
+ }
+ label.Label_Type{
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ } 
+ #username, #email,#phone, #tradingViewId, #password, #repeatPassword, #referralId {
+    color: #000;
+    font-weight: 600;
+    width: 100%;
+    padding: 10px 30px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    outline: none;
+    border-bottom: 2px solid #123367 ; 
+    border-radius: 5px;
+    padding-left: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* position: relative; 
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(85deg, #F8AD1E, #142539); */
+}
+
+#username:hover, #email:hover,#phone:hover, #tradingViewId:hover, #password:hover, #repeatPassword:hover, #referralId:hover {
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(85deg, #F8AD1E, #142539);
+}
+
+input:focus {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    transition: all 0.1s ease;
+    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(85deg, #F8AD1E, #142539);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+div.Input_checkbox{
+display: flex;
+align-items: center;
+padding-top: 5px;
+padding-bottom: 10px;
+border-radius: 5px;
+margin-left: 10px;
+}
+input[type='checkbox']{
+    transform: scale(1.15);
+    cursor: pointer;
+    outline: none;
+background-color: transparent;
+}
+p.Show_Pass{
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 5px;
+}
+
+button.Btn_submit:hover {
+    color: #fff; 
+}
+div.Account_already{
+    text-align: center;
+    margin-top: 15px;
+    color: #000;
+}
+div.Account_already_forgot{
+    margin-top: 15px; 
+}
+div.Account_already_forgot{
+    display: flex;
+    justify-content: center;
+}
+a.Login_Page{
+ text-decoration: none;
+ font-size: 18px;
+ margin-left: 2px;
+ text-align: center;
+ color: #000;
+}
+
+a.Login_Page:hover{
+    color: #000;
+    text-decoration: underline;
+}
+
+div.Rem_me{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 7px;
+    margin-right: 10px;
+    margin-bottom: 7px;
+    margin-top: 5px;
+}
+div.Rem{
+    display: flex;
+    align-items: center;
+}
+p.Remember{
+    margin-left: 5px;
+    color: #F8AD1E;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+a.Forgot_page{
+    text-decoration: none;
+    color: #000;
+       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+a.Forgot_page:hover{
+    color: #ff7709;
+}
+.Eye_BTN {
+    position: absolute;
+    right: 58px;
+    top: 54.3%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #F8AD1E;
+  }
+    
+div.Check_box_show{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+p.Show_new_password{
+    margin-left: 5px;
+}
+
+button.Btn_submit-signup {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #123367;
+    color: #fff;
+    outline: none;
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    transform: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button.Btn_submit-signup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 300%;
+    height: 100%;
+   background-color: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+button.Btn_submit-signup:hover::before {
+    left: 0;
+}
+
+div.user-name{
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 15px;
+    font-size: 16px;
+}
+div.user-en{
+    position: absolute;
+    margin-top: -39px;
+    margin-left: 15px;
+    font-size: 16px; 
+}
+div.user-lo{
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 15px;
+    font-size: 16px; 
+}
+div.error-msg{
+    right: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    color: red;
+}
+/* div.error-msg:hover{
+    color: #fff;
+} */
+
+#circle-info{
+    font-size: 5px;
+}
+p.flex-cricle{
+    display: flex;
+    align-items: center;
+}
+#circle-info{
+    margin-right: 5px;
+}
+span.pass-word{
+    font-size: 16px;
+}
+
+.messages_list {
+    display: none;
+    margin-top: 10px;
+    position: absolute;
+    right: 8.8%;
+    z-index: 10;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    top: 44%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.59);
+    max-width: 300px;
+}
+
+.messages_list::after {
+    content: "";
+    position: absolute;
+    top: 56%;
+    right: -20px; 
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff; 
+    transform: translateY(-50%); 
+}
+
+.error-msg:hover + .messages_list {
+    display: block;
+}
+
+.error-msg:hover + .messages_list {
+    display: block;
+}
+
+.messages_list .flex-cricle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.messages_list .fa-circle {
+    margin-right: 5px;
+}
+
+.messages_list .pass-word {
+    font-size: 14px;
+    color: #000;
+}
+
+.error-msg {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding-left: 5px;
+    display: block;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+div.right-sidr{
+    position: relative;
+}
+div.user-right{
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    right: 0%;
+    margin-top: -38px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+div.refer{
+    transition: all 0.3s ease-in-out;
+}
+
+/* #pass-word-eye {
+    display: none;
+}
+
+/* Show the eye icon when the password input is focused 
+#passwordInput:focus + .right-sidr .user-right #pass-word-eye {
+    display: block;
+} */
+
+.error-input {
+    border-bottom: 2px solid red !important;
+}
+
+.error-msg {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding-left: 5px;
+    display: block;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff3f3;
+    border-radius: 4px;
+    border: 1px solid #ffcdd2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Input_name {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+.Input_checkbox {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding-left: 5px;
+}
+
+.Input_checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.Show_Pass {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+
+.error-input {
+    border-bottom: 2px solid red !important;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff3f3;
+    border-radius: 4px;
+    border: 1px solid #ffcdd2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}

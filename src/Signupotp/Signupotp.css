@@ -1,0 +1,285 @@
+.Signupotp_image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('./images/backgroung_sendotp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.otp-container-signupotp {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 50%;
+    padding: 20px;
+}
+
+.otp-box-signupotp {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h2.Email_ver {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otp-info {
+    text-align: center;
+    color: #34495e;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.spam-note {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 14px;
+    margin: 20px 0;
+    padding: 12px;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otp-input-container-signupotp {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.otp-input {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-bottom: 2px solid #18181A;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.otp-input:focus {
+    border: 2px solid none;
+    border-bottom: 2px solid #3498db;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.otp-input.error {
+    border: 2px solid transparent;
+    border-bottom: 2px solid #e74c3c !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.2) !important;
+}
+
+.otp-input.error:focus {
+    border: 2px solid transparent;
+    border-bottom: 2px solid #e74c3c !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+}
+
+.timer-section {
+    right: 20%;
+    margin-right: 50px;
+    text-align: end;
+    color: #7f8c8d;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 15px 0;
+}
+
+.resend-text {
+    background: none;
+    border: none;
+    color: #3498db;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.resend-text:hover:not(:disabled) {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.resend-text:disabled {
+    color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+button.Btn_submit-signupotp {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+}
+
+button.Btn_submit-signupotp:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+button.Btn_submit-signupotp:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.resend-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.resend-button {
+    background: none;
+    border: none;
+    color: #3498db;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.resend-button:hover:not(:disabled) {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+}
+
+.resend-button:disabled {
+    color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.message {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.message.success {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.message.error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #c0392b;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.popup-message-signupotp {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    min-width: 200px;
+}
+
+.popup-message-signupotp.error {
+    background-color: #e74c3c;
+    border-left: 4px solid #c0392b;
+}
+
+.popup-message-signupotp.success {
+    background-color: #2ecc71;
+    border-left: 4px solid #27ae60;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+}
+
+@media (max-width: 768px) {
+    .otp-container-signupotp {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .otp-box-signupotp {
+        padding: 25px;
+    }
+
+    .otp-input {
+        width: 40px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    h2.Email_ver {
+        font-size: 24px;
+    }
+} 
