@@ -135,27 +135,27 @@ function Home() {
 
     const slides = [
         {
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/cuttrading5.jpeg',
+            img: 'https://bhargav1376.github.io/trading/src/index/images/cuttrading5.jpeg',
             title: "Professional Trading",
             desc: "Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights."
         },
         {
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/cuttrading1.jpeg',
+            img: 'https://bhargav1376.github.io/trading/src/index/images/cuttrading1.jpeg',
             title: "Advanced Charts",
             desc: "Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data."
         },
         {
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/trading3.jpg',
+            img: 'https://bhargav1376.github.io/trading/src/index/images/trading3.jpg',
             title: "Smart Alerts",
             desc: "Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices."
         },
         {
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/demobg1wat.png',
+            img: 'https://bhargav1376.github.io/trading/src/index/images/demobg1wat.png',
             title: "Global Access",
             desc: "Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading."
         },
         {
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/trading10.webp',
+            img: 'https://bhargav1376.github.io/trading/src/index/images/trading10.webp',
             title: "Secure Portfolio",
             desc: "Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind."
         }
@@ -526,7 +526,7 @@ function Home() {
             <header className="Header">
                 <nav className="Nav_bar">
                     <div className="Logo">
-                        <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/Logo.png" alt="Astrolite" className="Logo_img" />
+                        <img src="https://bhargav1376.github.io/trading/src/index/images/Logo.png" alt="Astrolite" className="Logo_img" />
                     </div>
                     <div className="hamburger-menu" onClick={toggleMenu}>
                         <i className={`fa ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -705,7 +705,7 @@ function Home() {
                                 <div className="line2"></div>
                                 <div className="line3"></div>
                                 <div className="line4"></div>
-                                <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/demoimage.jpeg" alt="Trading Business" className="trading-image" />
+                                <img src="https://bhargav1376.github.io/trading/src/index/images/demoimage.jpeg" alt="Trading Business" className="trading-image" />
                                 <div className="logo"> Trading <span>PRO</span></div>
                             </div>
                         </div>
@@ -752,7 +752,7 @@ function Home() {
                             >
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">    
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider1.jpg" alt="Slide 1" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider1.jpg" alt="Slide 1" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Market Momentum</h2>
                                             <p className="slider_p-wapper">
@@ -765,7 +765,7 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider5.jpg" alt="Slide 2" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider5.jpg" alt="Slide 2" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Tech Surge</h2>
                                             <p className="slider_p-wapper">
@@ -778,7 +778,7 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider2.jpg" alt="Slide 3" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider2.jpg" alt="Slide 3" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Crypto Waves</h2>
                                             <p className="slider_p-wapper">
@@ -791,7 +791,7 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider3.jpg" alt="Slide 4" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider3.jpg" alt="Slide 4" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Energy Upswing</h2>
                                             <p className="slider_p-wapper">
@@ -804,7 +804,7 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider4.jpg" alt="Slide 5" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider4.jpg" alt="Slide 5" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Retail Revival</h2>
                                             <p className="slider_p-wapper">
@@ -817,7 +817,7 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider6.jpg" alt="Slide 6" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider6.jpg" alt="Slide 6" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Healthcare Growth</h2>
                                             <p className="slider_p-wapper">
@@ -1033,7 +1033,7 @@ function Home() {
                         <div className="grid_link">
                             <div className="grid_first">
                                 <div className="img_gr_f">
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/Logo.png" alt="Logo" />
+                                    <img src="https://bhargav1376.github.io/trading/src/index/images/Logo.png" alt="Logo" />
                                 </div>
                             </div>
                             <div className="grid_second">
