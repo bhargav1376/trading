@@ -535,16 +535,21 @@ function Home() {
                         <div className="list_nav">
                             <ul className="Nav_list">
                                 <li className="Li_listnav">
-                                    <a className="a_navhef Animone" href="./indicators" onClick={() => {
+                                    <a className="a_navhef Animone" href="/bhargav1376/trading.git/indicators" onClick={(e) => {
+                                        e.preventDefault();
                                         scrollToIndicators();
                                         setIsMenuOpen(false);
                                     }}>Indicators</a>
                                 </li>
                                 <li className="Li_listnav">
-                                    <a className="a_navhef Animtwo" href="./dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</a>
+                                    <a className="a_navhef Animtwo" href="/bhargav1376/trading.git/dashboard" onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsMenuOpen(false);
+                                    }}>Dashboard</a>
                                 </li>
                                 <li className="Li_listnav">
-                                    <a className="a_navhef Animthree" href="./about" onClick={() => {
+                                    <a className="a_navhef Animthree" href="/bhargav1376/trading.git/about" onClick={(e) => {
+                                        e.preventDefault();
                                         scrollToAbout();
                                         setIsMenuOpen(false);
                                     }}>About</a>
@@ -746,89 +751,89 @@ function Home() {
                                 className="slide-content"
                             >
                                 <SwiperSlide>
-                                <div className="swiper-slide slider_img_graph-s ">    
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider1.jpg" alt="Slide 1" className="slider_img_graph" />
-                                    <div className="slide-text">
-                                        <h2 className="slider_name">Market Momentum</h2>
-                                        <p className="slider_p-wapper">
-                                            Accelerating growth with intermittent pullbacks—ideal for stock‑performance dashboards. 
-                                            Robust trading volumes confirm bullish conviction, while technical indicators highlight healthy consolidation phases.
-                                        </p>
-                                    </div>
-                                </div>  
+                                    <div className="swiper-slide slider_img_graph-s">    
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider1.jpg" alt="Slide 1" className="slider_img_graph" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Market Momentum</h2>
+                                            <p className="slider_p-wapper">
+                                                Accelerating growth with intermittent pullbacks—ideal for stock‑performance dashboards. 
+                                                Robust trading volumes confirm bullish conviction, while technical indicators highlight healthy consolidation phases.
+                                            </p>
+                                        </div>
+                                    </div>  
                                 </SwiperSlide>
 
                                 <SwiperSlide>
-                                <div className="swiper-slide slider_img_graph-s ">   
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider5.jpg" alt="Slide 2" className="slider_img_graph" />
-                                    <div className="slide-text">
-                                        <h2 className="slider_name">Tech Surge</h2>
-                                        <p className="slider_p-wapper">
-                                            These charts vividly depict a strong and sustained upward trend that is clearly evident within the technology sector.
-                                            The visual representation showcases a consistent pattern of growth.
-                                        </p>
+                                    <div className="swiper-slide slider_img_graph-s">   
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider5.jpg" alt="Slide 2" className="slider_img_graph" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Tech Surge</h2>
+                                            <p className="slider_p-wapper">
+                                                These charts vividly depict a strong and sustained upward trend that is clearly evident within the technology sector.
+                                                The visual representation showcases a consistent pattern of growth.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 </SwiperSlide>
 
                                 <SwiperSlide>
-                                <div className="swiper-slide slider_img_graph-s ">   
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider2.jpg" alt="Slide 3" className="slider_img_graph" />
-                                    <div className="slide-text">
-                                        <h2 className="slider_name">Crypto Waves</h2>
-                                        <p className="slider_p-wapper">
-                                            The "Crypto Waves" charts visually represent the often volatile price fluctuations characteristic of the cryptocurrency market.
-                                            Despite these frequent ups and downs, the overall trend depicted in the visualizations.
-                                        </p>
+                                    <div className="swiper-slide slider_img_graph-s">   
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider2.jpg" alt="Slide 3" className="slider_img_graph" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Crypto Waves</h2>
+                                            <p className="slider_p-wapper">
+                                                The "Crypto Waves" charts visually represent the often volatile price fluctuations characteristic of the cryptocurrency market.
+                                                Despite these frequent ups and downs, the overall trend depicted in the visualizations.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 </SwiperSlide>
 
                                 <SwiperSlide>
-                                <div className="swiper-slide slider_img_graph-s ">   
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider3.jpg" alt="Slide 4" className="slider_img_graph" />
-                                    <div className="slide-text">
-                                        <h2 className="slider_name">Energy Upswing</h2>
-                                        <p className="slider_p-wapper">
-                                            The "Energy Upswing" charts illustrate a noticeable and consistent recovery within both oil and gas markets.
-                                            These visualizations clearly demonstrate a steady climb in market indicators following a previously experienced.
-                                        </p>
+                                    <div className="swiper-slide slider_img_graph-s">   
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider3.jpg" alt="Slide 4" className="slider_img_graph" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Energy Upswing</h2>
+                                            <p className="slider_p-wapper">
+                                                The "Energy Upswing" charts illustrate a noticeable and consistent recovery within both oil and gas markets.
+                                                These visualizations clearly demonstrate a steady climb in market indicators following a previously experienced.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 </SwiperSlide>
 
                                 <SwiperSlide>
-                                <div className="swiper-slide slider_img_graph-s ">   
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider4.jpg" alt="Slide 5" className="slider_img_graph" />
-                                    <div className="slide-text">
-                                        <h2 className="slider_name">Retail Revival</h2>
-                                        <p className="slider_p-wapper">
-                                            The "Retail Revival" charts clearly depict a significant rebound in consumer spending activities.
-                                            These visuals illustrate a positive upturn in retail markets corresponding with the reopening of various sectors.
-                                        </p>
+                                    <div className="swiper-slide slider_img_graph-s">   
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider4.jpg" alt="Slide 5" className="slider_img_graph" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Retail Revival</h2>
+                                            <p className="slider_p-wapper">
+                                                The "Retail Revival" charts clearly depict a significant rebound in consumer spending activities.
+                                                These visuals illustrate a positive upturn in retail markets corresponding with the reopening of various sectors.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 </SwiperSlide>
 
                                 <SwiperSlide>
-                                <div className="swiper-slide slider_img_graph-s ">   
-                                    <img src="https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/sliderimgs/slider6.jpg" alt="Slide 6" className="slider_img_graph" />
-                                    <div className="slide-text">
-                                        <h2 className="slider_name">Healthcare Growth</h2>
-                                        <p className="slider_p-wapper">
-                                            The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
-                                            These visualizations demonstrate an extension of a previously established positive.
-                                        </p>
+                                    <div className="swiper-slide slider_img_graph-s">   
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/slider6.jpg" alt="Slide 6" className="slider_img_graph" />
+                                        <div className="slide-text">
+                                            <h2 className="slider_name">Healthcare Growth</h2>
+                                            <p className="slider_p-wapper">
+                                                The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
+                                                These visualizations demonstrate an extension of a previously established positive.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 </SwiperSlide>
 
                                 <div className="arrows_left-right">
                                     <div className="swiper-button">
-                                        <button className="left-prev" onClick={() => handlePrevSlide()}><i className="fa fa-angle-left" aria-hidden="true"></i></button>
+                                        <button className="left-prev"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
                                     </div>
                                     <div className="swiper-button">
-                                        <button className="right-prev" onClick={() => handleNextSlide()}><i className="fa fa-angle-right" aria-hidden="true"></i></button>
+                                        <button className="right-prev"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
                                 <div className="swiper-pagination"></div>
@@ -1097,11 +1102,11 @@ function Home() {
                     </div>
                     <div className='Btns_log-sign'>
                         <div className='Btn_class-con'>
-                            <button className='Btn_class-con-btn' onClick={() => window.location.href = './signin'}>Sign In</button>
+                            <button className='Btn_class-con-btn' onClick={() => window.location.href = '/bhargav1376/trading.git/signin'}>Sign In</button>
                         </div>
                         <div className='span_line'>/</div>
                         <div className='Btn_class-con'>
-                            <button className='Btn_class-con-btn' onClick={() => window.location.href = './signup'}>Sign Up</button>
+                            <button className='Btn_class-con-btn' onClick={() => window.location.href = '/bhargav1376/trading.git/signup'}>Sign Up</button>
                         </div>
                     </div>
                 </div>

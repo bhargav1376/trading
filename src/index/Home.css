@@ -1442,161 +1442,173 @@ animation-fill-mode: backwards;
 
 
 /* Slider Start here  */
-section.Slider_section-detail{
-background-color: var(--white);
-}
-div.Slider_section{
-width: 100%;
-margin: auto;
+section.Slider_section-detail {
+    padding: 50px 0;
+    background: var(--white);
+    overflow: hidden;
 }
 
-div.silder_show-animation{
-  opacity: 0;
-  transform: translateY(100px);
-
-}
-div.silder_show-animation.Slidershow{
-  opacity: 1;
-  transform: translateY(0);
-  animation: slidershows 0.5s ease-in-out forwards;
-}
-@keyframes slidershows {
-  0% { 
-      transform: translateY(100px);
-      opacity: 0;
-   }
-  50% { 
-      transform: translateY(0);
-      opacity: 0.5; 
-  }
-  100% { 
-      transform: translateY(0); 
-      opacity: 1; 
-  } 
+div.Slider_section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-div.slider_show-width{
-width: 90%;
-margin: auto;
-padding-top: 60px;
-padding-bottom: 60px;
+div.slider_show-width {
+    position: relative;
+    overflow: hidden;
 }
+
+div.silder_show-animation {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+div.silder_show-animation.Slidershow {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .slider_img_graph-s {
-margin-top: 30px;
-position: relative;         
-border-radius: 8px;
-box-shadow: 0 4px 12px rgba(0,0,0,.15);
-border: 5px solid var(--textbg);
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
-.swiper-slide{
-position: relative;         
-border-radius: 8px;
+
+.slider_img_graph-s:hover {
+    transform: translateY(-5px);
 }
+
+.swiper-slide {
+    padding: 20px;
+}
+
 .swiper-slide-active {
-transform: translateY(-30px) !important;
-box-shadow: 0 12px 24px rgba(0,0,0,.25);
+    transform: scale(1.05);
+    z-index: 1;
 }
 
 .left-prev,
-.swiper-slide-prev {
-transform: translateY(0);      
+.right-prev {
+    background: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .arrows_left-right {
-position: absolute; 
-top: 50%;          
-left: 0;
-right: 0;
-display: flex;      
-justify-content: space-between; 
-padding: 0 10px;     
-transform: translateY(-50%); 
-z-index: 10;         
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 10;
+    pointer-events: none;
 }
-div.swiper:hover div.arrows_left-right{
-display: flex;
-}
-div.arrows_left-right{
-display: none;
+
+.swiper-button {
+    pointer-events: auto;
 }
 
 .swiper-button button {
-background: none;
-border: none;
-font-size: 25px;
-color: var(--white);     
-cursor: pointer;
-outline: none;
-background-color: var(--textbg);
-padding: 5px 10px;
-padding-top:7px ;
-border-radius: 50%;
-border: 2px solid transparent;
+    background: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
-.swiper-button button:hover{
-border: 2px solid var(--textbg);
-background-color: var(--white);
-color: var(--textbg);     
+
+.swiper-button button:hover {
+    background: var(--textbg);
+    color: var(--white);
 }
 
 img.slider_img_graph {
-width: 100%;
-height: 400px;
-object-fit: fill;
-border-radius: 4px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
-/* overlay box */
 .slide-text {
-position: absolute;
-bottom: 0px; left: 0; right: 0;     
-/* top: 70%; */
-padding: 12px 16px;
-background: var(--slider);
+    padding: 20px;
+    background: var(--white);
 }
 
-/* fine‑tune typography */
 h2.slider_name {
-margin: 0;
-font-size: 35px;
-text-align: center;
-font-weight: 600;
-margin-bottom: 10px;
-margin-top: 10px;
-color: var(--black);
+    font-size: 1.5rem;
+    color: var(--black);
+    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
 }
+
 p.slider_p-wapper {
-margin: 2px 0 0;
-font-size: 16px;
-line-height: 25px;
-padding-bottom: 10px;
-color: var(--black);
+    font-size: 0.9rem;
+    color: var(--rgbawhite);
+    line-height: 1.6;
+    font-family: "Karla", sans-serif;
 }
 
-/* place dots under the slides */
 .swiper-pagination {
-position: absolute;      /* remove absolute positioning */
-margin-top: 10px;      /* space between slides and dots */
-text-align: center;    /* center the bullets */
-
+    position: relative;
+    margin-top: 20px;
 }
 
 .swiper-pagination-bullet {
-width: 12px;
-height: 12px;
-opacity: .6;
-transition: opacity .3s, transform .3s;
-background: var(--textbg) !important;
+    width: 10px;
+    height: 10px;
+    background: var(--rgbawhite);
+    opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-opacity: 1;
-transform: scale(1.25);
+    background: var(--textbg);
+    opacity: 1;
+    transform: scale(1.2);
 }
 
-
-/* Slider Ends here  */
-
+@media screen and (max-width: 768px) {
+    .swiper-slide-active {
+        transform: scale(1);
+    }
+    
+    .arrows_left-right {
+        padding: 0 10px;
+    }
+    
+    .swiper-button button {
+        width: 35px;
+        height: 35px;
+    }
+    
+    h2.slider_name {
+        font-size: 1.2rem;
+    }
+    
+    p.slider_p-wapper {
+        font-size: 0.8rem;
+    }
+}
 
 /* Contact form start here  */
 section.Contact_us-section {
