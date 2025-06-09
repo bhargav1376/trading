@@ -752,7 +752,7 @@ function Home() {
                             >
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">    
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider1.jpg" alt="Slide 1" className="slider_img_graph" />
+                                        <img src="https://bhargav1376.github.io/bhargav1376/trading.git/src/index/images/sliderimgs/sildercopy.jpg" alt="Slide 1" className="slider_img_graph" />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Market Momentum</h2>
                                             <p className="slider_p-wapper">
