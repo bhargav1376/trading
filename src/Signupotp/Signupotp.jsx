@@ -7,7 +7,6 @@ const Signupotp = () => {
     const location = useLocation();
     const [otp, setOtp] = useState(['', '', '', '', '', '', '']);
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('error'); // 'error' or 'success'
@@ -135,7 +134,6 @@ const Signupotp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setMessage('');
         setOtpError(false); // Reset error state
 
         const otpString = otp.join('');
@@ -174,7 +172,6 @@ const Signupotp = () => {
 
     const handleResendOtp = async () => {
         setLoading(true);
-        setMessage('');
 
         try {
             const response = await fetch('http://localhost:3030/api/resend-signup-otp', {

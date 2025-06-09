@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
 import signupImage from './images/sig.webp';
-import axios from 'axios';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -44,6 +43,10 @@ const Signup = () => {
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
     const [showReferral, setShowReferral] = useState(false);
 
+    // Mock data for validation
+    const mockEmails = ['existing@example.com'];
+    const mockTradingViewIds = ['existing_user'];
+
     // Validation patterns
     const patterns = {
         username: /^[a-zA-Z]{3,}$/,  // Only letters, minimum 3 characters
@@ -52,67 +55,6 @@ const Signup = () => {
         password: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,  // At least 8 chars, 1 uppercase, 1 number, 1 special char
         referralId: /^ATS[a-zA-Z0-9]{5}$/  // Must start with ATS (case-insensitive) followed by 3 alphanumeric characters
     };
-
-    // Add debounce function for email check
-    const debounce = (func, wait) => {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
-
-    // Check email availability
-    const checkEmailAvailability = async (email) => {
-        if (!email || !patterns.email.test(email)) return;
-        
-        try {
-            const response = await fetch(`http://localhost:3030/api/check-email?email=${encodeURIComponent(email)}`);
-            if (!response.ok) {
-                setErrors(prev => ({
-                    ...prev,
-                    email: 'This email is already registered'
-                }));
-            } else {
-                setErrors(prev => ({
-                    ...prev,
-                    email: ''
-                }));
-            }
-        } catch (error) {
-            console.error('Error checking email:', error);
-        }
-    };
-
-    // Check TradingView ID availability
-    const checkTradingViewIdAvailability = async (tradingViewId) => {
-        if (!tradingViewId || !/^[a-zA-Z0-9_]+$/.test(tradingViewId)) return;
-        
-        try {
-            const response = await fetch(`http://localhost:3030/api/check-tradingview-id?tradingViewId=${encodeURIComponent(tradingViewId)}`);
-            if (!response.ok) {
-                setErrors(prev => ({
-                    ...prev,
-                    tradingViewId: 'This TradingView ID is already registered'
-                }));
-            } else {
-                setErrors(prev => ({
-                    ...prev,
-                    tradingViewId: ''
-                }));
-            }
-        } catch (error) {
-            console.error('Error checking TradingView ID:', error);
-        }
-    };
-
-    // Debounced checks
-    const debouncedEmailCheck = debounce(checkEmailAvailability, 500);
-    const debouncedTradingViewIdCheck = debounce(checkTradingViewIdAvailability, 500);
 
     // Handle input changes with immediate validation
     const handleInputChange = (e) => {
@@ -131,16 +73,6 @@ const Signup = () => {
 
         // Immediate validation
         validateField(name, processedValue);
-        
-        // Check email availability when email field changes
-        if (name === 'email' && patterns.email.test(value)) {
-            debouncedEmailCheck(value);
-        }
-
-        // Check TradingView ID availability when tradingViewId field changes
-        if (name === 'tradingViewId' && /^[a-zA-Z0-9_]+$/.test(value)) {
-            debouncedTradingViewIdCheck(value);
-        }
     };
 
     // Validate individual field
@@ -169,6 +101,8 @@ const Signup = () => {
                     error = 'Email is required';
                 } else if (!patterns.email.test(value)) {
                     error = 'Email must be valid and end with .com, .in, or .co';
+                } else if (mockEmails.includes(value)) {
+                    error = 'This email is already registered';
                 }
                 break;
 
@@ -177,6 +111,16 @@ const Signup = () => {
                     error = 'Phone number is required';
                 } else if (!patterns.phone.test(value)) {
                     error = 'Phone number must start with 6,7,8,9 and be exactly 10 digits';
+                }
+                break;
+
+            case 'tradingViewId':
+                if (!value) {
+                    error = 'Trading View ID is required';
+                } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+                    error = 'Trading View ID can only contain letters, numbers, and underscores';
+                } else if (mockTradingViewIds.includes(value)) {
+                    error = 'This TradingView ID is already registered';
                 }
                 break;
 
@@ -196,21 +140,11 @@ const Signup = () => {
                 }
                 break;
 
-            case 'tradingViewId':
-                if (!value) {
-                    error = 'Trading View ID is required';
-                } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
-                    error = 'Trading View ID can only contain letters, numbers, and underscores';
-                }
-                break;
-
             case 'referralId':
                 if (showReferral && value) {
                     if (!value.toUpperCase().startsWith('ATS')) {
-                       // error = 'Referral ID must start with ATS';
-                       error = 'Enter a valid Referral ID';
+                        error = 'Enter a valid Referral ID';
                     } else if (!patterns.referralId.test(value)) {
-                        //error = 'Referral ID must be exactly 8 characters (ATS followed by 3 Numbers)';
                         error = 'Enter a valid Referral ID';
                     }
                 }
@@ -271,52 +205,25 @@ const Signup = () => {
         e.preventDefault();
         
         if (validateForm()) {
-            try {
-                // Set submitting state to true immediately
-                setIsSubmitting(true);
-                
-                // Generate referral ID before submission
+            setIsSubmitting(true);
+            
+            // Mock registration process
+            setTimeout(() => {
                 const referral_id = generateReferralId();
-                
                 const submitData = {
                     ...formData,
                     referral_id,
-                    // Remove fields not needed by the server
                     repeatPassword: undefined
                 };
 
-                // First, send OTP
-                const otpResponse = await fetch('http://localhost:3030/api/send-signup-otp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: submitData.email
-                    }),
-                });
-
-                const otpData = await otpResponse.json();
-
-                if (otpResponse.ok) {
-                    // If OTP sent successfully, navigate to OTP verification page immediately
-                    navigate('/signup-otp', { state: { formData: submitData } });
-                } else {
-                    setErrors(prev => ({
-                        ...prev,
-                        submit: otpData.error || 'Failed to send OTP. Please try again.'
-                    }));
-                    // Reset submitting state if there's an error
-                    setIsSubmitting(false);
-                }
-            } catch (error) {
-                setErrors(prev => ({
-                    ...prev,
-                    submit: 'An error occurred during registration. Please try again.'
-                }));
-                // Reset submitting state if there's an error
+                // Mock successful registration
+                console.log('Registration data:', submitData);
+                
+                // Navigate to OTP verification
+                navigate('/signup-otp', { state: { formData: submitData } });
+                
                 setIsSubmitting(false);
-            }
+            }, 1000);
         }
     };
 
@@ -483,6 +390,7 @@ const Signup = () => {
                                         <button 
                                             type="submit" 
                                             className="Btn_submit-signup"
+                                            onClick={handleSubmit}
                                             disabled={isSubmitting}
                                         >
                                             {isSubmitting ? 'Processing...' : 'Register'}

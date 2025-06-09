@@ -7,7 +7,6 @@ const Otp = () => {
     const location = useLocation();
     const [otp, setOtp] = useState(['', '', '', '', '', '', '']);
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState({ text: '', type: '' });
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('error');
@@ -123,7 +122,6 @@ const Otp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setMessage({ text: '', type: '' });
         setOtpError(false);
 
         const otpString = otp.join('');
@@ -161,7 +159,6 @@ const Otp = () => {
 
     const handleResendOtp = async () => {
         setLoading(true);
-        setMessage({ text: '', type: '' });
 
         try {
             const response = await fetch('http://localhost:3030/api/send-otp', {

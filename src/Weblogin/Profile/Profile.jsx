@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { 
-    FaBars,
-    FaTimes,
-    FaSearch,
-    FaBell,
-    FaUserCircle,
-    FaTimes as FaClose
-} from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser, FaBell, FaSearch } from 'react-icons/fa';
 import './Profile.css'; 
 import Logo from '../../index/images/Logo.png'; 
 
@@ -204,7 +197,7 @@ const Profile = () => {
                             {notifications > 0 && <span className="notification-badge">{notifications}</span>}
                         </div>
                         <div className="user-profile">
-                            <FaUserCircle />
+                            <FaUser />
                             <span className="username">{userData.username}</span>
                         </div>
                         <button className="logout-button" onClick={handleLogout}>Logout</button>
@@ -225,7 +218,7 @@ const Profile = () => {
                              {/* Add other key contact info here */}
                          </div>
                          <button className="profile-hero-edit-btn" onClick={handleEditClick}>
-                             Edit Contact Info
+                             Edit Profile
                          </button>
                      </div>
 
@@ -262,8 +255,8 @@ const Profile = () => {
                      </div>
 
                       <div className="profile-footer-buttons">
-                           <button className="footer-btn">View Full Activity Log</button>
-                           <button className="footer-btn secondary">Manage Account Settings</button>
+                           <button className="footer-btn" onClick={() => window.location.href = './activity-log'}>View Full Activity Log</button>
+                           <button className="footer-btn secondary" onClick={() => window.location.href = './account-settings'}>Manage Account Settings</button>
                      </div>
                  </div>
             </div>
@@ -274,9 +267,7 @@ const Profile = () => {
                     <div className="edit-modal">
                         <div className="modal-header">
                             <h2>Edit Contact Information</h2>
-                            <button className="modal-close-btn" onClick={handleCloseModal}>
-                                <FaClose />
-                            </button>
+                            <button className="modal-close-btn" onClick={handleCloseModal}>×</button>
                         </div>
                         <form className="modal-form" onSubmit={(e) => e.preventDefault()}>
                             <div className="form-group">
@@ -329,12 +320,8 @@ const Profile = () => {
                                 />
                             </div>
                             <div className="modal-actions">
-                                <button className="modal-btn cancel" onClick={handleCloseModal}>
-                                    Cancel
-                                </button>
-                                <button className="modal-btn save" onClick={handleSaveChanges}>
-                                    Save Changes
-                                </button>
+                                <button className="modal-btn cancel" onClick={handleCloseModal}>Cancel</button>
+                                <button className="modal-btn save" onClick={handleSaveChanges}>Save Changes</button>
                             </div>
                         </form>
                     </div>

@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Signin.css';
-import signinImage from './images/log.jpg';
-import axios from 'axios';
-
-// Configure axios defaults
-axios.defaults.baseURL = 'http://localhost:3030';
-axios.defaults.withCredentials = true;
 
 const Signin = () => {
-
     useEffect(() => {
         document.title = 'Trading | Signin';
     }, []);
@@ -31,7 +24,12 @@ const Signin = () => {
     const [showErrorPopup, setShowErrorPopup] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    // Function to show error popup
+    // Mock user data
+    const mockUsers = [
+        { userId: 'admin@example.com', password: 'Admin@123', isAdmin: true },
+        { userId: 'user@example.com', password: 'User@123', isAdmin: false }
+    ];
+
     const showError = (message) => {
         setErrorMessage(message);
         setShowErrorPopup(true);
@@ -40,11 +38,9 @@ const Signin = () => {
         }, 4000);
     };
 
-    // Handle input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         
-        // Validate email/phone input characters
         if (name === 'userId') {
             const validChars = /^[a-zA-Z0-9@._\-+()\s]+$/;
             if (value && !validChars.test(value)) {
@@ -59,62 +55,50 @@ const Signin = () => {
             [name]: value
         }));
 
-        // Clear error when user starts typing
         setErrors(prev => ({
             ...prev,
             [name]: ''
         }));
     };
 
-    // Toggle password visibility
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-        // Auto hide after 4 seconds
         setTimeout(() => setShowPassword(false), 4000);
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setErrors(prev => ({ ...prev, submit: '', userId: '', password: '' }));
 
-        try {
-            const response = await axios.post('/api/login', formData);
+        // Mock login logic
+        setTimeout(() => {
+            const user = mockUsers.find(u => u.userId === formData.userId);
             
-            if (response.data.success) {
-                // Store user data in session storage with the correct key
-                sessionStorage.setItem('userData', JSON.stringify(response.data.user));
+            if (!user) {
+                showError('Invalid username, email, or phone number');
+                setErrors(prev => ({ ...prev, userId: 'error' }));
+            } else if (user.password !== formData.password) {
+                showError('Invalid password');
+                setErrors(prev => ({ ...prev, password: 'error' }));
+            } else {
+                // Mock successful login
+                const userData = {
+                    userId: user.userId,
+                    isAdmin: user.isAdmin,
+                    username: user.userId.split('@')[0]
+                };
                 
-                // Redirect based on admin status
-                if (response.data.user.isAdmin) {
+                sessionStorage.setItem('userData', JSON.stringify(userData));
+                
+                if (user.isAdmin) {
                     window.location.href = '/admin';
                 } else {
                     window.location.href = '/homepage';
                 }
             }
-        } catch (error) {
-            if (error.response) {
-                // Server responded with an error
-                const errorType = error.response.data.errorType;
-                const errorMessage = error.response.data.message;
-
-                if (errorType === 'userNotFound') {
-                    showError('Invalid username, email, or phone number');
-                    setErrors(prev => ({ ...prev, userId: 'error' }));
-                } else if (errorType === 'invalidPassword') {
-                    showError('Invalid password');
-                    setErrors(prev => ({ ...prev, password: 'error' }));
-                } else {
-                    showError(errorMessage || 'Login failed. Please try again.');
-                }
-            } else {
-                // Network error or other issues
-                showError('Network error. Please check your connection and try again.');
-            }
-        } finally {
             setIsLoading(false);
-        }
+        }, 1000);
     };
 
     return (
@@ -196,6 +180,7 @@ const Signin = () => {
                                             <button 
                                                 className="Btn_submit" 
                                                 type="submit"
+                                                onClick={handleSubmit}
                                                 disabled={isLoading}
                                             >
                                                 {isLoading ? 'Logging in...' : 'Login'}

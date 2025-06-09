@@ -451,7 +451,7 @@ const Homepage = () => {
                             <div className="chart-header">
                                 <h2>Portfolio Performance</h2>
                                 <div className="chart-actions">
-                                    <button className="chart-action-btn">
+                                    <button className="chart-action-btn" onClick={() => handleMarketFilterClick('all')}>
                                         <FaFilter />
                                     </button>
                                 </div>
@@ -464,7 +464,7 @@ const Homepage = () => {
                             <div className="chart-header">
                                 <h2>Asset Allocation</h2>
                                 <div className="chart-actions">
-                                    <button className="chart-action-btn">
+                                    <button className="chart-action-btn" onClick={() => handleMarketFilterClick('all')}>
                                         <FaFilter />
                                     </button>
                                 </div>
@@ -477,7 +477,7 @@ const Homepage = () => {
                             <div className="chart-header">
                                 <h2>Weekly Trading Volume</h2>
                                 <div className="chart-actions">
-                                    <button className="chart-action-btn">
+                                    <button className="chart-action-btn" onClick={() => handleMarketFilterClick('all')}>
                                         <FaFilter />
                                     </button>
                                 </div>

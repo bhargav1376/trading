@@ -122,11 +122,13 @@ function Home() {
         showSlide(currentSlideRef.current);
 
         // Set up auto-slide interval
-        const interval = setInterval(handleNextSlide, 7000);
+        const interval = setInterval(() => {
+            handleNextSlide();
+        }, 5000);
 
         // Cleanup interval on component unmount
         return () => clearInterval(interval);
-    }, []);
+    }, [handleNextSlide, showSlide]);
 
     // Scroll button functionality
     useEffect(() => {
@@ -608,7 +610,7 @@ function Home() {
             <header className="Header">
                 <nav className="Nav_bar">
                     <div className="Logo">
-                        <img src="./images/Logo.png" alt="Astrolite" className="Logo_img" />
+                        <img src="./images/logo.png" alt="Astrolite Logo" className="Logo_img" />
                     </div>
                     <div className="hamburger-menu" onClick={toggleMenu}>
                         <i className={`fa ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -786,7 +788,7 @@ function Home() {
                                 <div className="line2"></div>
                                 <div className="line3"></div>
                                 <div className="line4"></div>
-                                <img className="trading-image" src={require('./images/demoimage.jpeg')} alt="Trading Business Image" />
+                                <img className="trading-image" src="./images/demoimage.jpeg" alt="Trading Business" />
                                 <div className="logo"> Trading <span>PRO</span></div>
                             </div>
                         </div>
@@ -961,10 +963,10 @@ function Home() {
 
             <div className="arrows_left-right">
               <div className="swiper-button">
-                <button className="left-prev"><i className="fa fa-angle-left" aria-hidden="true"></i></button>
+                <button className="left-prev" onClick={() => handlePrevSlide()}><i className="fa fa-angle-left" aria-hidden="true"></i></button>
               </div>
               <div className="swiper-button">
-                <button className="right-prev"><i className="fa fa-angle-right" aria-hidden="true"></i></button>
+                <button className="right-prev" onClick={() => handleNextSlide()}><i className="fa fa-angle-right" aria-hidden="true"></i></button>
               </div>
             </div>
             <div className="swiper-pagination"></div>
@@ -1017,10 +1019,10 @@ function Home() {
                                         </div>
                                         <div className="Social-media-control">
                                             <div className="social-media">
-                                                <a href="#" className="social-icon Facebook-icon"><i className="fa-brands fa-facebook-f"></i></a>
-                                                <a href="#" className="social-icon Twitter-icon"><i className="fa-brands fa-twitter"></i></a>
-                                                <a href="#" className="social-icon instagram-icon"><i className="fa-brands fa-instagram"></i></a>
-                                                <a href="#" className="social-icon linked-in-icon"><i className="fa-brands fa-linkedin-in"></i></a>
+                                                <a href="https://facebook.com" className="social-icon Facebook-icon"><i className="fa-brands fa-facebook-f"></i></a>
+                                                <a href="https://twitter.com" className="social-icon Twitter-icon"><i className="fa-brands fa-twitter"></i></a>
+                                                <a href="https://instagram.com" className="social-icon instagram-icon"><i className="fa-brands fa-instagram"></i></a>
+                                                <a href="https://linkedin.com" className="social-icon linked-in-icon"><i className="fa-brands fa-linkedin-in"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -1096,7 +1098,7 @@ function Home() {
                                             </div>
                                         )}
                                         <div className="submit-input">
-                                            <button type="submit" className="btn-form-form">Submit</button>
+                                            <button type="submit" className="btn-form-form" onClick={handleSubmit}>Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1204,20 +1206,12 @@ function Home() {
                                     <h3 className="Links_pr">Follow Us</h3>
                                     <div className="social_links_p">
                                         <div className="two_grid">
-                                            <a className="social_media" href="#">
-                                                <i className="fab fa-facebook-f"></i>
-                                            </a>
-                                            <a className="social_media" href="#">
-                                                <i className="fab fa-x-twitter"></i>
-                                            </a>
+                                            <a href="https://facebook.com" className="social_media"><i className="fa-brands fa-facebook-f"></i></a>
+                                            <a href="https://twitter.com" className="social_media"><i className="fa-brands fa-twitter"></i></a>
                                         </div>
                                         <div className="two_ico">
-                                            <a className="social_media" href="#">
-                                                <i className="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a className="social_media" href="#">
-                                                <i className="fab fa-youtube"></i>
-                                            </a>
+                                            <a href="https://instagram.com" className="social_media"><i className="fa-brands fa-instagram"></i></a>
+                                            <a href="https://linkedin.com" className="social_media"><i className="fa-brands fa-linkedin-in"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -1239,9 +1233,7 @@ function Home() {
             {/* scroll btn start here   */}
             <div className="scroll_btn">
                 <div className="btn_top">
-                    <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} id="scrollmyBtn" title="Go to top">
-                        <i id="scroll_up_i" className="fa-solid fa-arrow-up"></i>
-                    </button>
+                    <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} id="scrollmyBtn" title="Go to top">↑</button>
                 </div>
             </div>
             <SuccessModal />
@@ -1254,15 +1246,11 @@ function Home() {
                     </div>
                     <div className='Btns_log-sign'>
                         <div className='Btn_class-con'>
-                            <button className='Btn_class-con-btn'>
-                                <Link className='link_btn-log' to="/signin">Login</Link>
-                            </button>
+                            <button className='Btn_class-con-btn' onClick={() => window.location.href = './signin'}>Sign In</button>
                         </div>
                         <div className='span_line'>/</div>
                         <div className='Btn_class-con'>
-                            <button className='Btn_class-con-btn'>
-                                <Link className='link_btn-sign' to="/signup">Signup</Link>
-                            </button>
+                            <button className='Btn_class-con-btn' onClick={() => window.location.href = './signup'}>Sign Up</button>
                         </div>
                     </div>
                 </div>
