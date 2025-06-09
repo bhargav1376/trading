@@ -1,37 +1,21 @@
 {
   "files": {
     "main.css": "/bhargav1376/trading.git/static/css/main.b5b8811a.css",
-    "main.js": "/bhargav1376/trading.git/static/js/main.2fc1e0dc.js",
-    "static/media/cuttrading1.jpeg": "/bhargav1376/trading.git/static/media/cuttrading1.bc8a05a10020b1a574e0.jpeg",
+    "main.js": "/bhargav1376/trading.git/static/js/main.588035a3.js",
     "static/media/Backgrondotp.png": "/bhargav1376/trading.git/static/media/Backgrondotp.ed49e987248a860b76c1.png",
     "static/media/backgroung_sendotp.png": "/bhargav1376/trading.git/static/media/backgroung_sendotp.e035b7bbb7259fae0642.png",
-    "static/media/demobg1wat.png": "/bhargav1376/trading.git/static/media/demobg1wat.1f4f2033ec744aab1d16.png",
     "static/media/bgupdateimg.png": "/bhargav1376/trading.git/static/media/bgupdateimg.fad5f4faa17cea1d0f65.png",
     "static/media/sig.webp": "/bhargav1376/trading.git/static/media/sig.be0228ac7aba2a93230a.webp",
     "static/media/footor-blue.png": "/bhargav1376/trading.git/static/media/footor-blue.ed02383c23f7449c7190.png",
     "static/media/footor-black.png": "/bhargav1376/trading.git/static/media/footor-black.83c59dd071b5800ebc02.png",
-    "static/media/cuttrading5.jpeg": "/bhargav1376/trading.git/static/media/cuttrading5.ea4c7cf835eea156e8bb.jpeg",
-    "static/media/slider3.jpg": "/bhargav1376/trading.git/static/media/slider3.9cec5eaaec6e2a220ebd.jpg",
-    "static/media/trading10.webp": "/bhargav1376/trading.git/static/media/trading10.7f62dbfa66e40592507d.webp",
-    "static/media/slider4.jpg": "/bhargav1376/trading.git/static/media/slider4.e453d6dfdc6859227115.jpg",
-    "static/media/ind4.webp": "/bhargav1376/trading.git/static/media/ind4.0d522e5f38ad7bdcc66d.webp",
-    "static/media/trading3.jpg": "/bhargav1376/trading.git/static/media/trading3.27452ce86acc721c43de.jpg",
-    "static/media/silder1.jpg": "/bhargav1376/trading.git/static/media/silder1.8c798ff94c797200b4e1.jpg",
-    "static/media/slider5.jpg": "/bhargav1376/trading.git/static/media/slider5.8f534fe2a264dcf6ccbb.jpg",
-    "static/media/Logo.png": "/bhargav1376/trading.git/static/media/Logo.46b7fa5bc27cbc243845.png",
-    "static/media/ind2.webp": "/bhargav1376/trading.git/static/media/ind2.9cf5deac368fe5c66576.webp",
-    "static/media/slider2.jpg": "/bhargav1376/trading.git/static/media/slider2.1c5f11e1af03fca91fe2.jpg",
     "static/media/section_about_upper.png": "/bhargav1376/trading.git/static/media/section_about_upper.185625fe2c30f2086230.png",
-    "static/media/ind3.webp": "/bhargav1376/trading.git/static/media/ind3.bdbdf2f3ab8cff0de53b.webp",
-    "static/media/ind1.webp": "/bhargav1376/trading.git/static/media/ind1.44495d849b9959798051.webp",
-    "static/media/slider6.jpg": "/bhargav1376/trading.git/static/media/slider6.e73cafdf61a1e87cfb8a.jpg",
     "static/media/Section_About-black.png": "/bhargav1376/trading.git/static/media/Section_About-black.6ff50ace3200b8167be2.png",
     "index.html": "/bhargav1376/trading.git/index.html",
     "main.b5b8811a.css.map": "/bhargav1376/trading.git/static/css/main.b5b8811a.css.map",
-    "main.2fc1e0dc.js.map": "/bhargav1376/trading.git/static/js/main.2fc1e0dc.js.map"
+    "main.588035a3.js.map": "/bhargav1376/trading.git/static/js/main.588035a3.js.map"
   },
   "entrypoints": [
     "static/css/main.b5b8811a.css",
-    "static/js/main.2fc1e0dc.js"
+    "static/js/main.588035a3.js"
   ]
 }
