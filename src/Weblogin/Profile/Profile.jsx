@@ -134,7 +134,7 @@ const Profile = () => {
             <div className="top-bar_container-home">
                 <div className="top-bar">
                     <div className="logo-container">
-                        <img src="./images/logo.png" alt="Trading Logo" className="logo-homepage" />
+                        <img src="https://bhargav1376.github.io/trading/Images/unnamed.png" alt="Trading Logo" className="logo-homepage" />
                         <button className="menu-toggle" onClick={toggleMenu}>
                             {isMenuOpen ? <FaTimes /> : <FaBars />}
                         </button>
