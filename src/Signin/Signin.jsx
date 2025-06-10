@@ -29,7 +29,7 @@ const Signin = () => {
     // Mock user data
     const mockUsers = [
         { userId: 'admin@example.com', password: 'Admin@123', isAdmin: true },
-        { userId: 'user@example.com', password: 'User@123', isAdmin: false }
+        { userId: 'b@gmail.com', password: 'b', isAdmin: false }
     ];
 
     const showError = (message) => {
@@ -70,15 +70,15 @@ const Signin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        setErrors(prev => ({ ...prev, submit: '', userId: '', password: '' }));
+        try {
+            setIsLoading(true);
+            setErrors(prev => ({ ...prev, submit: '', userId: '', password: '' }));
 
-        // Mock login logic
-        setTimeout(() => {
+            // Mock login logic
             const user = mockUsers.find(u => u.userId === formData.userId);
             
             if (!user) {
-                showError('Invalid username, email, or phone number');
+                showError('Invalid email, or phone number');
                 setErrors(prev => ({ ...prev, userId: 'error' }));
             } else if (user.password !== formData.password) {
                 showError('Invalid password');
@@ -94,13 +94,16 @@ const Signin = () => {
                 sessionStorage.setItem('userData', JSON.stringify(userData));
                 
                 if (user.isAdmin) {
-                    navigate('/admin');
+                    navigate('/bhargav1376/trading.git/admin');
                 } else {
                     navigate('/homepage');
                 }
             }
             setIsLoading(false);
-        }, 1000);
+        } catch (error) {
+            console.error('Login error:', error);
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -118,7 +121,7 @@ const Signin = () => {
             <div className="Login_page">
                 <div className="Login_details">
                     <div className="Details_form_logins">
-                        <div className="Login_from_flex">
+                        <div className="Login_from_flex-l">
                             <div className="Move_circle_1"></div>
                             <div className="div_flex">
                                 <div className="Submit_Form-login">
@@ -195,7 +198,7 @@ const Signin = () => {
                                 </div>
                                 <div className="img_src-lo">
                                     <div className="img-tr">
-                                        <img className="img-src-login" src="https://bhargav1376.github.io/trading/public/Images/log.jpg" alt="Trading" />
+                                        <img className="img-src-login" src="https://bhargav1376.github.io/trading/Images/log.jpg" alt="Trading" />
                                     </div>
                                 </div>
                             </div>

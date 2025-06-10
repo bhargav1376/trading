@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import './darkmode.css';
 // import 'swiper/css/bundle';
@@ -853,12 +854,11 @@ function Home() {
             
             {showDemoModal && (
                 <div 
-                    className="demo-modal" 
+                    className="demo-modal show-modal" 
                     ref={demoModalRef}
-                    style={{ display: 'block' }}
                 >
                     <div className="demo-contant-modal">
-                        <span 
+                        <button 
                             className="demo-close" 
                             onClick={closeDemoModal}
                             role="button"
@@ -870,7 +870,7 @@ function Home() {
                             }}
                         >
                             &times;
-                        </span>
+                        </button>
                         <div className="matter-demo_l">
                             <h2 className="Account_de">Open Account</h2>
                             <p className="wel_set">Welcome to the demo account setup. Explore features before signing up!</p>
@@ -887,7 +887,7 @@ function Home() {
                         </div>
                         <div className="open_demo_acc">
                             <div className="open_demo_acc_btn">
-                                <button className="open_demo_btn">
+                                <a href="/bhargav1376/trading.git/signup" className="open_demo_btn">
                                     <span className="left-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 15" width="16" height="16" fill="currentColor">
                                             <path d="M 10 0 L 10 5 L 5 5 L 0 0 Z M 0 5 L 5 5 L 10 10 L 5 10 L 5 15 L 0 10 Z"></path>
@@ -899,7 +899,7 @@ function Home() {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                                         </svg>
                                     </span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1313,11 +1313,11 @@ function Home() {
                     </div>
                     <div className='Btns_log-sign'>
                         <div className='Btn_class-con'>
-                            <button className='Btn_class-con-btn' onClick={() => window.location.href = '/bhargav1376/trading.git/signin'}>Sign In</button>
+                            <Link to="/signin" className='Btn_class-con-btn'>Sign In</Link>
                         </div>
                         <div className='span_line'>/</div>
                         <div className='Btn_class-con'>
-                            <button className='Btn_class-con-btn' onClick={() => window.location.href = '/bhargav1376/trading.git/signup'}>Sign Up</button>
+                            <Link to="/signup" className='Btn_class-con-btn'>Sign Up</Link>
                         </div>
                     </div>
                 </div>

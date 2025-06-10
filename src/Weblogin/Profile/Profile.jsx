@@ -1,80 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaBars, FaTimes, FaUser, FaBell, FaSearch } from 'react-icons/fa';
 import './Profile.css';
 
 const Profile = () => {
-    const [userData, setUserData] = useState(null); // Assuming user data is needed
-    const [loading, setLoading] = useState(true); // Assuming loading state is needed
-    const [error, setError] = useState(''); // Assuming error state is needed
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [activeMenuItem, setActiveMenuItem] = useState('profile'); // Set active menu item to 'profile'
-    const [notifications] = useState(3); // Assuming notifications state is needed
+    const [activeMenuItem, setActiveMenuItem] = useState('profile');
+    const [notifications] = useState(3);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editForm, setEditForm] = useState({
-        username: '',
-        phone: '',
-        dateOfBirth: '',
-        address: ''
+        username: 'Demo User',
+        email: 'demo@example.com',
+        phone: '+1 234 567 8900',
+        dateOfBirth: '1990-01-01',
+        address: '123 Demo Street, Demo City'
     });
+
+    // Dummy user data
+    const userData = {
+        username: 'Demo User',
+        email: 'demo@example.com',
+        phone: '+1 234 567 8900',
+        dateOfBirth: '1990-01-01',
+        address: '123 Demo Street, Demo City',
+        membership: 'Premium',
+        joinDate: 'January 2023',
+        activity: {
+            lastLogin: '2 hours ago',
+            totalTrades: 156,
+            successRate: '78%'
+        }
+    };
+
     const navigate = useNavigate();
 
-    // Add useEffect to load user data (similar to Homepage)
-     useEffect(() => {
-        const storedUserData = sessionStorage.getItem('userData');
-        if (storedUserData) {
-            try {
-                const parsedData = JSON.parse(storedUserData);
-                if (parsedData && parsedData.id) {
-                    setUserData(parsedData);
-                } else {
-                    setError('Invalid user data');
-                    // Optionally redirect to login if invalid data
-                }
-            } catch (err) {
-                setError('Error loading user data');
-                 // Optionally redirect to login on error
-            }
-        } else {
-            setError('Please login to view your details');
-            // Optionally redirect to login if not logged in
-        }
-        setLoading(false);
-    }, [navigate]);
-
-    // Update editForm when userData changes
-    useEffect(() => {
-        if (userData) {
-            setEditForm({
-                username: userData.username || '',
-                phone: userData.phone || '',
-                dateOfBirth: userData.dateOfBirth || '',
-                address: userData.address || ''
-            });
-        }
-    }, [userData]);
-
     const handleLogout = () => {
-        sessionStorage.removeItem('userData');
-        navigate('/signin'); // Assuming signin route
+        navigate('/signin');
     };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-     const handleMenuItemClick = (menuItem) => {
+    const handleMenuItemClick = (menuItem) => {
         setActiveMenuItem(menuItem);
-        // Add navigation logic here if needed, or handle via Link to prop
     };
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
-        console.log('Searching for:', e.target.value);
     };
 
-     const handleNotificationClick = () => {
+    const handleNotificationClick = () => {
         console.log('Notifications clicked');
     };
 
@@ -95,35 +72,17 @@ const Profile = () => {
     };
 
     const handleSaveChanges = () => {
-        // Here you would typically make an API call to update the user data
         console.log('Saving changes:', editForm);
-        // For now, we'll just update the local state
-        setUserData(prev => ({
-            ...prev,
-            ...editForm
-        }));
         setIsModalOpen(false);
     };
 
-    if (loading) {
-        return <div className="loading">Loading...</div>;
-    }
-
-    if (error) {
-        return <div className="error-message">{error}</div>;
-    }
-
-    if (!userData) {
-        return <div className="error-message">No user data found. Please login again.</div>;
-    }
-
     return (
-        <div className="homepage-container"> {/* Using homepage-container class for consistent layout */} 
+        <div className="homepage-container">
             <div className={`sidebar ${isMenuOpen ? '' : 'menu-closed'}`}>
                 <nav className={`sidebar-menu ${isMenuOpen ? 'menu-open' : 'menu-closed'}`}>
                     <ul>
                         <Link
-                            to="/homepage" 
+                            to="/homepage"
                             className={activeMenuItem === 'dashboard' ? 'active' : ''}
                             onClick={() => handleMenuItemClick('dashboard')}
                         >
@@ -160,7 +119,7 @@ const Profile = () => {
                         </Link>
                           
                           <Link
-                            to="/settings" 
+                            to="/settings"
                             className={activeMenuItem === 'settings' ? 'active' : ''}
                             onClick={() => handleMenuItemClick('settings')}
                         >
@@ -172,7 +131,7 @@ const Profile = () => {
                 </nav>
             </div>
 
-            <div className="top-bar_container-home"> 
+            <div className="top-bar_container-home">
                 <div className="top-bar">
                     <div className="logo-container">
                         <img src="./images/logo.png" alt="Trading Logo" className="logo-homepage" />
@@ -208,13 +167,11 @@ const Profile = () => {
                      <div className="profile-hero-header">
                          <div className="profile-avatar-hero">
                               <i className="fa fa-user-circle"></i>
-                              {/* Option to add an image */}
                          </div>
                          <div className="profile-contact-info">
                              <h1 className="profile-hero-name">{userData.username}</h1>
-                             <p className="profile-hero-contact">Email: {userData.email || 'No email provided'}</p>
-                             <p className="profile-hero-contact">Phone: {userData.phone || 'No phone provided'}</p>
-                             {/* Add other key contact info here */}
+                             <p className="profile-hero-contact">Email: {userData.email}</p>
+                             <p className="profile-hero-contact">Phone: {userData.phone}</p>
                          </div>
                          <button className="profile-hero-edit-btn" onClick={handleEditClick}>
                              Edit Profile
@@ -222,45 +179,34 @@ const Profile = () => {
                      </div>
 
                      <div className="profile-details-cards-grid">
-                         {/* Personal Details Card */}
                          <div className="profile-card">
                              <h2 className="card-title">Personal Details</h2>
-                             <p><strong>Date of Birth:</strong> {userData.dateOfBirth || 'Not provided'}</p>
-                             <p><strong>Address:</strong> {userData.address || 'Not provided'}</p>
-                             {/* Add more personal details */}
+                             <p><strong>Date of Birth:</strong> {userData.dateOfBirth}</p>
+                             <p><strong>Address:</strong> {userData.address}</p>
                          </div>
 
-                         {/* Account Overview Card */}
                          <div className="profile-card">
                              <h2 className="card-title">Account Overview</h2>
-                             <p><strong>Membership:</strong> Premium</p>
-                             <p><strong>Join Date:</strong> January 2023</p>
-                             {/* Add more account overview details */}
+                             <p><strong>Membership:</strong> {userData.membership}</p>
+                             <p><strong>Join Date:</strong> {userData.joinDate}</p>
                          </div>
 
-                          {/* Activity Summary Card */}
                          <div className="profile-card">
                               <h2 className="card-title">Activity Summary</h2>
-                              <p>Brief summary of recent activity.</p>
-                              {/* Add activity data */}
+                              <p><strong>Last Login:</strong> {userData.activity.lastLogin}</p>
+                              <p><strong>Total Trades:</strong> {userData.activity.totalTrades}</p>
+                              <p><strong>Success Rate:</strong> {userData.activity.successRate}</p>
                           </div>
 
-                          {/* Security Settings Card */}
-                         <div className="profile-card">
+                          <div className="profile-card">
                               <h2 className="card-title">Security Settings</h2>
-                              <p>Security status and options.</p>
-                              {/* Add security status/actions */}
+                              <p><strong>Two-Factor Auth:</strong> Enabled</p>
+                              <p><strong>Last Password Change:</strong> 30 days ago</p>
                           </div>
-                     </div>
-
-                      <div className="profile-footer-buttons">
-                           <button className="footer-btn" onClick={() => window.location.href = './activity-log'}>View Full Activity Log</button>
-                           <button className="footer-btn secondary" onClick={() => window.location.href = './account-settings'}>Manage Account Settings</button>
                      </div>
                  </div>
             </div>
 
-            {/* Edit Modal */}
             {isModalOpen && (
                 <div className="edit-modal-overlay">
                     <div className="edit-modal">
@@ -274,7 +220,7 @@ const Profile = () => {
                                 <input
                                     type="email"
                                     id="email"
-                                    value={userData.email || ''}
+                                    value={userData.email}
                                     readOnly
                                 />
                             </div>

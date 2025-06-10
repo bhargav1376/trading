@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { 
     FaBars,
@@ -45,9 +45,6 @@ ChartJS.register(
 );
 
 const Homepage = () => {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeMenuItem, setActiveMenuItem] = useState('dashboard');
@@ -57,6 +54,12 @@ const Homepage = () => {
     const [watchlist, setWatchlist] = useState(['BTC']);
     const [showAllTrades, setShowAllTrades] = useState(false);
     const navigate = useNavigate();
+
+    // Dummy user data
+    const userData = {
+        username: 'Demo User',
+        isAdmin: false
+    };
 
     // Mock data for demonstration
     const mockMarketData = {
@@ -73,31 +76,7 @@ const Homepage = () => {
         { id: 5, type: 'BUY', symbol: 'EUR/USD', amount: '1000 units', price: 1.2345, time: '20 min ago', status: 'pending' }
     ];
 
-    useEffect(() => {
-        // Get user data from session storage
-        const storedUserData = sessionStorage.getItem('userData');
-        if (storedUserData) {
-            try {
-                const parsedData = JSON.parse(storedUserData);
-                if (parsedData && parsedData.id) {
-                    setUserData(parsedData);
-                } else {
-                    setError('Invalid user data');
-                    setTimeout(() => navigate('/signin'), 2000);
-                }
-            } catch (err) {
-                setError('Error loading user data');
-                setTimeout(() => navigate('/signin'), 2000);
-            }
-        } else {
-            setError('Please login to view your details');
-            setTimeout(() => navigate('/signin'), 2000);
-        }
-        setLoading(false);
-    }, [navigate]);
-
     const handleLogout = () => {
-        sessionStorage.removeItem('userData');
         navigate('/signin');
     };
 
@@ -107,25 +86,18 @@ const Homepage = () => {
 
     const handleMenuItemClick = (menuItem) => {
         setActiveMenuItem(menuItem);
-        // Add navigation logic here if needed
     };
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
-        // Implement search functionality here
-        console.log('Searching for:', e.target.value);
     };
 
     const handleTimeFilterChange = (e) => {
         setTimeFilter(e.target.value);
-        // Update charts and data based on time filter
-        console.log('Time filter changed to:', e.target.value);
     };
 
     const handleMarketFilterClick = (filter) => {
         setMarketFilter(filter);
-        // Filter market cards based on selection
-        console.log('Market filter changed to:', filter);
     };
 
     const toggleWatchlist = (symbol) => {
@@ -143,7 +115,6 @@ const Homepage = () => {
     };
 
     const handleNotificationClick = () => {
-        // Implement notification panel logic
         console.log('Notifications clicked');
     };
 
@@ -279,18 +250,6 @@ const Homepage = () => {
             },
         },
     };
-
-    if (loading) {
-        return <div className="loading">Loading...</div>;
-    }
-
-    if (error) {
-        return <div className="error-message">{error}</div>;
-    }
-
-    if (!userData) {
-        return <div className="error-message">No user data found. Please login again.</div>;
-    }
 
     const displayedTrades = showAllTrades ? mockTrades : mockTrades.slice(0, 3);
 

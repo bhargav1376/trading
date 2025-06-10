@@ -243,13 +243,13 @@ const Signup = () => {
             <div className="Signup-content">
                 <div className="Signup-image">
                     <img 
-                        src="https://bhargav1376.github.io/trading/public/Images/sig.webp" 
+                        src="https://bhargav1376.github.io/trading/Images/sig.webp" 
                         alt="Signup" 
                         className="signup-image"
                     />
                 </div>
                 <div className="Signup-form">
-                    <h1>Create Account</h1>
+                    <h1 className='create-acco' >Create Account</h1>
                     <form onSubmit={handleSubmit}>
                         {errors.submit && (
                             <div className="error-message" style={{ color: 'red', marginBottom: '10px', textAlign: 'center' }}>
@@ -387,7 +387,7 @@ const Signup = () => {
                             {isSubmitting ? 'Processing...' : 'Register'}
                         </button>
                         <div className="form-footer">
-                            <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+                            <p className='account-already'>Already have an account? <Link to="/signin">Sign In</Link></p>
                         </div>
                     </form>
                 </div>
