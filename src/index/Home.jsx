@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './Home.css';
 import './darkmode.css';
-import 'swiper/css/bundle';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+// import 'swiper/css/bundle';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 
@@ -614,43 +614,151 @@ function Home() {
             <section className="Image_slider">
                 <div className="Slider_wrapper">
                     <div className="Slider">
-                        {slides.map((slide, index) => (
-                            <div 
-                                key={index} 
-                                className="Slider_img"
-                            >
-                                <div className="grid_img">
-                                    <div className="Img_slide">
-                                        <div className="Img_overlay"></div>
-                                        <img 
-                                            src={slide.img} 
-                                            alt={`Slider ${index + 1}`} 
-                                            className="Img_slider-img"
-                                            onError={(e) => {
-                                                console.error(`Failed to load image: ${slide.img}`);
-                                                e.target.style.display = 'none';
-                                            }}
-                                        />
-                                        <div className="matter_img">
-                                            <h1 className="Pro_trad">{slide.title}</h1>
-                                            <p className="Analyze_pro">{slide.desc}</p>
-                                            <div className="connect_more">
-                                                <button className="btn-txt" onClick={() => window.location.href = '/contact'}>Connect</button>
-                                            </div>
+                        <div className="Slider_img">
+                            <div className="grid_img">
+                                <div className="Img_slide">
+                                    <div className="Img_overlay"></div>
+                                    <img src="https://bhargav1376.github.io/trading/Images/cuttrading5.jpeg" alt="Slider Image 1" className="Img_slider-img" />
+                                    <div className="matter_img">
+                                        <h1 className="Pro_trad">Professional Trading</h1>
+                                        <p className="Analyze_pro">Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights.</p>
+                                        <div className="connect_more">
+                                            <a href="#" className="btn-txt">Connect</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        </div>
+                        <div className="Slider_img">
+                            <div className="grid_img">
+                                <div className="Img_slide">
+                                    <div className="Img_overlay"></div>
+                                    <img src="https://bhargav1376.github.io/trading/Images/cuttrading1.jpeg" alt="Slider Image 2" className="Img_slider-img" />
+                                    <div className="matter_img">
+                                        <h1 className="Pro_trad">Advanced Charts</h1>
+                                        <p className="Analyze_pro">Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data.</p>
+                                        <div className="connect_more">
+                                            <a href="#" className="btn-txt">Connect</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Slider_img">
+                            <div className="grid_img">
+                                <div className="Img_slide">
+                                    <div className="Img_overlay"></div>
+                                    <img src="https://bhargav1376.github.io/trading/Images/trading3.jpg" alt="Slider Image 3" className="Img_slider-img" />
+                                    <div className="matter_img">
+                                        <h1 className="Pro_trad">Smart Alerts</h1>
+                                        <p className="Analyze_pro">Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices.</p>
+                                        <div className="connect_more">
+                                            <a href="#" className="btn-txt">Connect</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Slider_img">
+                            <div className="grid_img">
+                                <div className="Img_slide">
+                                    <div className="Img_overlay"></div>
+                                    <img src="https://bhargav1376.github.io/trading/Images/demobg1wat.png" alt="Slider Image 4" className="Img_slider-img" />
+                                    <div className="matter_img">
+                                        <h1 className="Pro_trad">Global Access</h1>
+                                        <p className="Analyze_pro">Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading.</p>
+                                        <div className="connect_more">
+                                            <a href="#" className="btn-txt">Connect</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="Slider_img">
+                            <div className="grid_img">
+                                <div className="Img_slide">
+                                    <div className="Img_overlay"></div>
+                                    <img src="https://bhargav1376.github.io/trading/Images/trading10.webp" alt="Slider Image 5" className="Img_slider-img" />
+                                    <div className="matter_img">
+                                        <h1 className="Pro_trad">Secure Portfolio</h1>
+                                        <p className="Analyze_pro">Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind.</p>
+                                        <div className="connect_more">
+                                            <a href="#" className="btn-txt">Connect</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="width_flex_slider_btn">
                         <div className="width_slider_flex">
-                            <button className="prev" onClick={handlePrevSlide}>&#10094;</button>
-                            <button className="next" onClick={handleNextSlide}>&#10095;</button>
+                            <button className="prev" id="prevBtn">&#10094;</button>
+                            <button className="next" id="nextBtn">&#10095;</button>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <script dangerouslySetInnerHTML={{
+                __html: `
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const slides = document.querySelectorAll("div.Slider_img");
+                        const sliderWrapper = document.querySelector("div.Slider");
+                        const prevButton = document.getElementById("prevBtn");
+                        const nextButton = document.getElementById("nextBtn");
+                        let currentIndex = 0;
+                    
+                        if (slides.length === 0 || !sliderWrapper) return;
+                    
+                        function animateSlideOut(index) {
+                            const img = slides[index].querySelector("img.Img_slider-img");
+                            const textEls = slides[index].querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
+                    
+                            img.classList.remove("show");
+                            textEls.forEach(el => el.classList.remove("show"));
+                        }
+                    
+                        function animateSlideIn(index) {
+                            const img = slides[index].querySelector("img.Img_slider-img");
+                            const textEls = slides[index].querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more,div.matter_img");
+                    
+                            img.classList.add("show");
+                            setTimeout(() => {
+                                textEls.forEach(el => el.classList.add("show"));
+                            }, 600);
+                        }
+                    
+                        function showSlide(index) {
+                            animateSlideOut(currentIndex);
+                    
+                            setTimeout(() => {
+                                sliderWrapper.style.transform = \`translateX(-\${index * 100}%)\`;
+                                setTimeout(() => {
+                                    animateSlideIn(index);
+                                }, 100);
+                            }, 500);
+                    
+                            currentIndex = index;
+                        }
+                    
+                        function nextSlide() {
+                            const nextIndex = (currentIndex + 1) % slides.length;
+                            showSlide(nextIndex);
+                        }
+                    
+                        function prevSlide() {
+                            const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                            showSlide(prevIndex);
+                        }
+                    
+                        prevButton.addEventListener("click", prevSlide);
+                        nextButton.addEventListener("click", nextSlide);
+                    
+                        showSlide(currentIndex);
+                        setInterval(nextSlide, 7000);
+                    });
+                `
+            }} />
 
             <section className="Indicators" id="sectionind" ref={indicatorsSectionRef}>
                 <div className="Indicators-wr">
@@ -785,8 +893,9 @@ function Home() {
                                 className="slide-content"
                                 onSwiper={(swiper) => {
                                     console.log('Swiper initialized:', swiper);
-                                    // Initialize the slider
+                                    // Force a re-render of the slider
                                     setTimeout(() => {
+                                        swiper.update();
                                         const animation = document.querySelector('.silder_show-animation');
                                         if (animation) {
                                             animation.classList.add('Slidershow');
@@ -1094,7 +1203,7 @@ function Home() {
                         <div className="grid_link">
                             <div className="grid_first">
                                 <div className="img_gr_f">
-                                    <img src="https://bhargav1376.github.io/trading/Images/Logo.png" alt="Logo" />
+                                    <img src="https://bhargav1376.github.io/trading/Images/unnamed.png" alt="Logo" />
                                 </div>
                             </div>
                             <div className="grid_second">
