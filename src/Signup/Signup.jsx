@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './signup.css';
-import signupImage from './images/sig.webp';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -203,206 +202,194 @@ const Signup = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        if (validateForm()) {
-            setIsSubmitting(true);
-            
-            // Mock registration process
-            setTimeout(() => {
-                const referral_id = generateReferralId();
-                const submitData = {
-                    ...formData,
-                    referral_id,
-                    repeatPassword: undefined
-                };
+        setIsSubmitting(true);
 
-                // Mock successful registration
-                console.log('Registration data:', submitData);
-                
-                // Navigate to OTP verification
-                navigate('/signup-otp', { state: { formData: submitData } });
-                
-                setIsSubmitting(false);
-            }, 1000);
+        if (!validateForm()) {
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            // Mock API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Generate referral ID
+            const referralId = generateReferralId();
+            
+            // Mock successful registration
+            const userData = {
+                username: formData.username,
+                email: formData.email,
+                referralId: referralId
+            };
+            
+            // Store in session storage
+            sessionStorage.setItem('userData', JSON.stringify(userData));
+            
+            // Navigate to OTP page
+            navigate('/signup-otp');
+        } catch (error) {
+            setErrors(prev => ({
+                ...prev,
+                submit: 'Registration failed. Please try again.'
+            }));
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     return (
-        <div className="Signup Form">
-            <div className="Image_Tag">
-                {/* Add your logo here if needed */}
-            </div>
-            <div className="Signup_page">
-                <div className="Signup_details">
-                    <div className="Details_form">
-                        <div className="Signup_from_flex">
-                            <div className="Image_Signup">
-                                {/* Add any additional images here */}
+        <div className="Signup-container">
+            <div className="Signup-content">
+                <div className="Signup-image">
+                    <img 
+                        src="https://bhargav1376.github.io/trading/public/Images/sig.webp" 
+                        alt="Signup" 
+                        className="signup-image"
+                    />
+                </div>
+                <div className="Signup-form">
+                    <h1>Create Account</h1>
+                    <form onSubmit={handleSubmit}>
+                        {errors.submit && (
+                            <div className="error-message" style={{ color: 'red', marginBottom: '10px', textAlign: 'center' }}>
+                                {errors.submit}
                             </div>
-                            <div className="Submit_Form">
-                                <div className="Img_src">
-                                    <div className="gap_m">
-                                        {/* Add any header content here */}
-                                    </div>
-                                    <img 
-                                        className="img-src" 
-                                        src={signupImage}
-                                        alt="Signup" 
-                                    />
-                                </div>
-
-                                <div className="Name_Flex">
-                                    <div className="Name_Tag">
-                                        <h1 className="Name_Tag">Signup</h1>
-                                    </div>
-
-                                    {errors.submit && (
-                                        <div className="error-message" style={{ color: 'red', marginBottom: '10px', textAlign: 'center' }}>
-                                            {errors.submit}
-                                        </div>
-                                    )}
-
-                                    <form className="Details_submit" onSubmit={handleSubmit}>
-                                        {errors.submit && <div className="error-message">{errors.submit}</div>}
-                                        
-                                        <div className="Input_name">
-                                            <label className="Label_Type">Username</label>
-                                            <input
-                                                type="text"
-                                                id='username'
-                                                name="username"
-                                                value={formData.username}
-                                                onChange={handleInputChange}
-                                                className={errors.username ? 'error-input' : ''}
-                                                placeholder="Enter your username"
-                                            />
-                                            {errors.username && <div className="error-msg">{errors.username}</div>}
-                                        </div>
-
-                                        <div className="Input_name">
-                                            <label className="Label_Type">Email</label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                id='email'  
-                                                value={formData.email}
-                                                onChange={handleInputChange}
-                                                className={errors.email ? 'error-input' : ''}
-                                                placeholder="Enter your email"
-                                            />
-                                            {errors.email && <div className="error-msg">{errors.email}</div>}
-                                        </div>
-
-                                        <div className="Input_name">
-                                            <label className="Label_Type">Phone</label>
-                                            <input
-                                                type="number"
-                                                name="phone"
-                                                id='phone'  
-                                                value={formData.phone}
-                                                onChange={handleInputChange}
-                                                className={errors.phone ? 'error-input' : ''}
-                                                placeholder="Enter your phone number"
-                                            />
-                                            {errors.phone && <div className="error-msg">{errors.phone}</div>}
-                                        </div>
-
-                                        <div className="Input_name">
-                                            <label className="Label_Type">TradingView ID</label>
-                                            <input
-                                                type="text"
-                                                name="tradingViewId"
-                                                id='tradingViewId'
-                                                value={formData.tradingViewId}
-                                                onChange={handleInputChange}
-                                                className={errors.tradingViewId ? 'error-input' : ''}
-                                                placeholder="Enter your TradingView ID"
-                                            />
-                                            {errors.tradingViewId && <div className="error-msg">{errors.tradingViewId}</div>}
-                                        </div>
-
-                                        <div className="Input_name">
-                                            <label className="Label_Type">Password</label>
-                                            <div className="password-input-container">
-                                                <input
-                                                    type={showPassword ? "text" : "password"}
-                                                    name="password"
-                                                    id='password'       
-                                                    value={formData.password}
-                                                    onChange={handleInputChange}
-                                                    className={errors.password ? 'error-input' : ''}
-                                                    placeholder="Enter your password"
-                                                />
-                                                <i
-                                                    className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'} password-toggle`}
-                                                    onClick={() => togglePasswordVisibility('password')}
-                                                ></i>
-                                            </div>
-                                            {errors.password && <div className="error-msg">{errors.password}</div>}
-                                        </div>
-
-                                        <div className="Input_name">
-                                            <label className="Label_Type">Repeat Password</label>
-                                            <div className="password-input-container">
-                                                <input
-                                                    type={showRepeatPassword ? "text" : "password"}
-                                                    name="repeatPassword"
-                                                    id='repeatPassword'
-                                                    value={formData.repeatPassword}
-                                                    onChange={handleInputChange}
-                                                    className={errors.repeatPassword ? 'error-input' : ''}
-                                                    placeholder="Repeat your password"
-                                                />
-                                                <i
-                                                    className={`fa ${showRepeatPassword ? 'fa-eye-slash' : 'fa-eye'} password-toggle`}
-                                                    onClick={() => togglePasswordVisibility('repeat')}
-                                                ></i>
-                                            </div>
-                                            {errors.repeatPassword && <div className="error-msg">{errors.repeatPassword}</div>}
-                                        </div>
-
-                                        <div className="Input_checkbox">
-                                            <input
-                                                type="checkbox"
-                                                id="showReferral"
-                                                checked={showReferral}
-                                                onChange={toggleReferral}
-                                            />
-                                            <label htmlFor="showReferral" className="Show_Pass">Have a Referral ID?</label>
-                                        </div>
-
-                                        {showReferral && (
-                                            <div className="Input_name">
-                                                <label className="Label_Type">Referral ID</label>
-                                                <input
-                                                    type="text"
-                                                    name="referralId"
-                                                    id='referralId'
-                                                    value={formData.referralId}
-                                                    onChange={handleInputChange}
-                                                    className={errors.referralId ? 'error-input' : ''}
-                                                    placeholder="Enter referral ID"
-                                                />
-                                                {errors.referralId && <div className="error-msg">{errors.referralId}</div>}
-                                            </div>
-                                        )}
-
-                                        <button 
-                                            type="submit" 
-                                            className="Btn_submit-signup"
-                                            onClick={handleSubmit}
-                                            disabled={isSubmitting}
-                                        >
-                                            {isSubmitting ? 'Processing...' : 'Register'}
-                                        </button>
-                                        <div className="Account_already">
-                                            Already have an account? <a className="Login_Page" href="./signin">Sign In</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                        )}
+                        
+                        <div className="Input_name">
+                            <label className="Label_Type">Username</label>
+                            <input
+                                type="text"
+                                id='username'
+                                name="username"
+                                value={formData.username}
+                                onChange={handleInputChange}
+                                className={errors.username ? 'error-input' : ''}
+                                placeholder="Enter your username"
+                            />
+                            {errors.username && <div className="error-msg">{errors.username}</div>}
                         </div>
-                    </div>
+
+                        <div className="Input_name">
+                            <label className="Label_Type">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                id='email'  
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className={errors.email ? 'error-input' : ''}
+                                placeholder="Enter your email"
+                            />
+                            {errors.email && <div className="error-msg">{errors.email}</div>}
+                        </div>
+
+                        <div className="Input_name">
+                            <label className="Label_Type">Phone</label>
+                            <input
+                                type="number"
+                                name="phone"
+                                id='phone'  
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                                className={errors.phone ? 'error-input' : ''}
+                                placeholder="Enter your phone number"
+                            />
+                            {errors.phone && <div className="error-msg">{errors.phone}</div>}
+                        </div>
+
+                        <div className="Input_name">
+                            <label className="Label_Type">TradingView ID</label>
+                            <input
+                                type="text"
+                                name="tradingViewId"
+                                id='tradingViewId'
+                                value={formData.tradingViewId}
+                                onChange={handleInputChange}
+                                className={errors.tradingViewId ? 'error-input' : ''}
+                                placeholder="Enter your TradingView ID"
+                            />
+                            {errors.tradingViewId && <div className="error-msg">{errors.tradingViewId}</div>}
+                        </div>
+
+                        <div className="Input_name">
+                            <label className="Label_Type">Password</label>
+                            <div className="password-input-container">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    id='password'       
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                    className={errors.password ? 'error-input' : ''}
+                                    placeholder="Enter your password"
+                                />
+                                <i
+                                    className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'} password-toggle`}
+                                    onClick={() => togglePasswordVisibility('password')}
+                                ></i>
+                            </div>
+                            {errors.password && <div className="error-msg">{errors.password}</div>}
+                        </div>
+
+                        <div className="Input_name">
+                            <label className="Label_Type">Repeat Password</label>
+                            <div className="password-input-container">
+                                <input
+                                    type={showRepeatPassword ? "text" : "password"}
+                                    name="repeatPassword"
+                                    id='repeatPassword'
+                                    value={formData.repeatPassword}
+                                    onChange={handleInputChange}
+                                    className={errors.repeatPassword ? 'error-input' : ''}
+                                    placeholder="Repeat your password"
+                                />
+                                <i
+                                    className={`fa ${showRepeatPassword ? 'fa-eye-slash' : 'fa-eye'} password-toggle`}
+                                    onClick={() => togglePasswordVisibility('repeat')}
+                                ></i>
+                            </div>
+                            {errors.repeatPassword && <div className="error-msg">{errors.repeatPassword}</div>}
+                        </div>
+
+                        <div className="Input_checkbox">
+                            <input
+                                type="checkbox"
+                                id="showReferral"
+                                checked={showReferral}
+                                onChange={toggleReferral}
+                            />
+                            <label htmlFor="showReferral" className="Show_Pass">Have a Referral ID?</label>
+                        </div>
+
+                        {showReferral && (
+                            <div className="Input_name">
+                                <label className="Label_Type">Referral ID</label>
+                                <input
+                                    type="text"
+                                    name="referralId"
+                                    id='referralId'
+                                    value={formData.referralId}
+                                    onChange={handleInputChange}
+                                    className={errors.referralId ? 'error-input' : ''}
+                                    placeholder="Enter referral ID"
+                                />
+                                {errors.referralId && <div className="error-msg">{errors.referralId}</div>}
+                            </div>
+                        )}
+
+                        <button 
+                            type="submit" 
+                            className="Btn_submit-signup"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Processing...' : 'Register'}
+                        </button>
+                        <div className="form-footer">
+                            <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

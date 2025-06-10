@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signin.css';
 
 const Signin = () => {
+    const navigate = useNavigate();
+    
     useEffect(() => {
         document.title = 'Trading | Signin';
     }, []);
@@ -92,9 +94,9 @@ const Signin = () => {
                 sessionStorage.setItem('userData', JSON.stringify(userData));
                 
                 if (user.isAdmin) {
-                    window.location.href = '/admin';
+                    navigate('/admin');
                 } else {
-                    window.location.href = '/homepage';
+                    navigate('/homepage');
                 }
             }
             setIsLoading(false);
@@ -186,14 +188,14 @@ const Signin = () => {
                                                 {isLoading ? 'Logging in...' : 'Login'}
                                             </button>
                                             <div className="Account_already">
-                                                Doesn't have an account yet? <a className="Login_Page" href="./signup">Sign Up</a>
+                                                Doesn't have an account yet? <Link className="Login_Page" to="/signup">Sign Up</Link>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div className="img_src-lo">
                                     <div className="img-tr">
-                                        <img className="img-src-login" src="./images/log.jpg" alt="Trading" />
+                                        <img className="img-src-login" src="https://bhargav1376.github.io/trading/public/Images/log.jpg" alt="Trading" />
                                     </div>
                                 </div>
                             </div>

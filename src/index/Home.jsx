@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './Home.css';
 import './darkmode.css';
+import 'swiper/css/bundle';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -135,27 +136,27 @@ function Home() {
 
     const slides = [
         {
-            img: 'https://bhargav1376.github.io/trading/src/index/images/cuttrading5.jpeg',
+            img: 'https://bhargav1376.github.io/trading/Images/cuttrading5.jpeg',
             title: "Professional Trading",
             desc: "Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights."
         },
         {
-            img: 'https://bhargav1376.github.io/trading/src/index/images/cuttrading1.jpeg',
+            img: 'https://bhargav1376.github.io/trading/Images/cuttrading1.jpeg',
             title: "Advanced Charts",
             desc: "Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data."
         },
         {
-            img: 'https://bhargav1376.github.io/trading/src/index/images/trading3.jpg',
+            img: 'https://bhargav1376.github.io/trading/Images/trading3.jpg',
             title: "Smart Alerts",
             desc: "Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices."
         },
         {
-            img: 'https://bhargav1376.github.io/trading/src/index/images/demobg1wat.png',
+            img: 'https://bhargav1376.github.io/trading/Images/demobg1wat.png',
             title: "Global Access",
             desc: "Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading."
         },
         {
-            img: 'https://bhargav1376.github.io/trading/src/index/images/trading10.webp',
+            img: 'https://bhargav1376.github.io/trading/Images/trading10.webp',
             title: "Secure Portfolio",
             desc: "Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind."
         }
@@ -230,28 +231,28 @@ function Home() {
     const indicators = [
         {
             id: 'rsiModal',
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind1.webp',
+            img: 'https://bhargav1376.github.io/trading/Images/ind1.webp',
             title: 'Relative Strength Index',
             desc: 'The relative strength index (RSI) is a pivotal technical indicator used to evaluate the momentum and trend strength of a market. Oscillating between 0 and 100.',
             modalContent: `The Relative Strength Index (RSI) is a momentum indicator that measures the speed and change of price movements. It ranges from 0 to 100, signaling overbought conditions above 70 and oversold conditions below 30. Commonly used on a 14-period scale, RSI helps identify potential market reversals. Traders often combine it with other indicators for better accuracy. It's effective across different timeframes, making it suitable for both short-term and long-term strategies. RSI is a staple tool for technical analysis in all markets. It also helps traders confirm the strength of price trends. Divergence between RSI and price can signal upcoming reversals.`
         },
         {
             id: 'bollingerModal',
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind2.webp',
+            img: 'https://bhargav1376.github.io/trading/Images/ind2.webp',
             title: 'Bollinger bands',
             desc: 'Bollinger bands are a popular technical analysis indicator employed to assess market volatility and price action. This technical indicator consists of three lines.',
             modalContent: `Bollinger Bands are a popular technical analysis indicator employed to assess market volatility and price action. This technical indicator consists of three lines. The middle line is a simple moving average (SMA), while the upper and lower bands are standard deviations from the SMA. When the bands widen, it indicates increased volatility; when they contract, it signals decreased volatility. Traders use Bollinger Bands to identify potential overbought or oversold conditions. Price touching the bands doesn't always imply reversal, but it's a cue for further analysis. They work well with candlestick patterns and other momentum indicators.`
         },
         {
             id: 'maModal',
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind3.webp',
+            img: 'https://bhargav1376.github.io/trading/Images/ind3.webp',
             title: 'Moving averages',
             desc: 'Moving averages are fundamental technical indicators for traders looking to understand the sentiment of the market and price action.',
             modalContent: `Moving averages are fundamental technical indicators for traders looking to understand the sentiment of the market and price action. They help smooth out price data over a specific time period, allowing traders to identify trends more easily. The most common types are the Simple Moving Average (SMA) and the Exponential Moving Average (EMA), with the EMA giving more weight to recent prices. Moving averages are often used to identify support and resistance levels and provide trade signals when price crosses the moving average line. A crossover strategy, where the short-term moving average crosses above the long-term moving average.`
         },
         {
             id: 'macdModal',
-            img: 'https://raw.githubusercontent.com/bhargav1376/trading/main/src/index/images/ind4.webp',
+            img: 'https://bhargav1376.github.io/trading/Images/ind4.webp',
             title: 'Moving convergence',
             desc: 'Most traders recognize that the moving average convergence divergence (MACD) indicator is a pivotal technical indicator in assessing a price trend.',
             modalContent: `Most traders recognize that the Moving Average Convergence Divergence (MACD) indicator is a pivotal technical indicator in assessing a price trend. It works by subtracting the 26-period exponential moving average (EMA) from the 12-period EMA. The result is the MACD line, and a 9-period EMA of this line forms the signal line. Crossovers between these lines often indicate buy or sell signals. MACD also helps identify bullish or bearish momentum through divergence with price action. It's most effective in trending markets rather than sideways conditions. Traders often combine it with other indicators to enhance accuracy. Its histogram representation provides a clear visual of momentum shifts.`
@@ -521,12 +522,30 @@ function Home() {
         };
     }, [isMenuOpen]);
 
+    useEffect(() => {
+        // Verify Swiper CSS loading
+        const swiperStyles = document.querySelectorAll('style[data-swiper]');
+        console.log('Swiper styles loaded:', swiperStyles.length > 0);
+        
+        // Verify Swiper initialization
+        const swiperInstance = document.querySelector('.swiper');
+        console.log('Swiper instance found:', !!swiperInstance);
+        
+        // Verify slider images
+        const sliderImages = document.querySelectorAll('.slider_img_graph');
+        console.log('Slider images found:', sliderImages.length);
+        sliderImages.forEach((img, index) => {
+            console.log(`Image ${index + 1} src:`, img.src);
+            console.log(`Image ${index + 1} loaded:`, img.complete);
+        });
+    }, []);
+
     return (
         <div className="Home">
             <header className="Header">
                 <nav className="Nav_bar">
                     <div className="Logo">
-                        <img src="https://bhargav1376.github.io/trading/src/index/images/Logo.png" alt="Astrolite" className="Logo_img" />
+                        <img src="https://bhargav1376.github.io/trading/Images/Logo.png" alt="Astrolite" className="Logo_img" />
                     </div>
                     <div className="hamburger-menu" onClick={toggleMenu}>
                         <i className={`fa ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -600,7 +619,15 @@ function Home() {
                                 <div className="grid_img">
                                     <div className="Img_slide">
                                         <div className="Img_overlay"></div>
-                                        <img src={slide.img} alt={`Slider ${index + 1}`} className="Img_slider-img" />
+                                        <img 
+                                            src={slide.img} 
+                                            alt={`Slider ${index + 1}`} 
+                                            className="Img_slider-img"
+                                            onError={(e) => {
+                                                console.error(`Failed to load image: ${slide.img}`);
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
                                         <div className="matter_img">
                                             <h1 className="Pro_trad">{slide.title}</h1>
                                             <p className="Analyze_pro">{slide.desc}</p>
@@ -705,7 +732,11 @@ function Home() {
                                 <div className="line2"></div>
                                 <div className="line3"></div>
                                 <div className="line4"></div>
-                                <img src="https://bhargav1376.github.io/trading/src/index/images/demoimage.jpeg" alt="Trading Business" className="trading-image" />
+                                <div className="img_src-lo">
+                                    <div className="img-tr">
+                                        <img className="img-src-login-h" src="https://bhargav1376.github.io/trading/Images/tradinng2.jpg" alt="Trading" />
+                                    </div>
+                                </div>
                                 <div className="logo"> Trading <span>PRO</span></div>
                             </div>
                         </div>
@@ -750,6 +781,7 @@ function Home() {
                                 }}
                                 className="slide-content"
                                 onSwiper={(swiper) => {
+                                    console.log('Swiper initialized:', swiper);
                                     // Initialize the slider
                                     setTimeout(() => {
                                         const animation = document.querySelector('.silder_show-animation');
@@ -758,10 +790,29 @@ function Home() {
                                         }
                                     }, 100);
                                 }}
+                                onSlideChange={(swiper) => {
+                                    console.log('Slide changed to:', swiper.activeIndex);
+                                }}
+                                style={{
+                                    '--swiper-navigation-color': '#fff',
+                                    '--swiper-pagination-color': '#fff',
+                                    '--swiper-pagination-bullet-inactive-color': '#999999',
+                                    '--swiper-pagination-bullet-inactive-opacity': '1',
+                                    '--swiper-pagination-bullet-size': '10px',
+                                    '--swiper-pagination-bullet-horizontal-gap': '6px'
+                                }}
                             >
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">    
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider3.jpg" alt="Slide 1" className="slider_img_graph" />
+                                        <img 
+                                            src="https://bhargav1376.github.io/trading/Images/sliderimgs/slider3.jpg" 
+                                            alt="Slide 1" 
+                                            className="slider_img_graph"
+                                            onError={(e) => {
+                                                console.error('Failed to load slider3.jpg');
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Market Momentum</h2>
                                             <p className="slider_p-wapper">
@@ -774,7 +825,15 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider5.jpg" alt="Slide 2" className="slider_img_graph" />
+                                        <img 
+                                            src="https://bhargav1376.github.io/trading/Images/sliderimgs/slider5.jpg" 
+                                            alt="Slide 2" 
+                                            className="slider_img_graph"
+                                            onError={(e) => {
+                                                console.error('Failed to load slider5.jpg');
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Tech Surge</h2>
                                             <p className="slider_p-wapper">
@@ -787,7 +846,15 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider2.jpg" alt="Slide 3" className="slider_img_graph" />
+                                        <img 
+                                            src="https://bhargav1376.github.io/trading/Images/sliderimgs/slider2.jpg" 
+                                            alt="Slide 3" 
+                                            className="slider_img_graph"
+                                            onError={(e) => {
+                                                console.error('Failed to load slider2.jpg');
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Crypto Waves</h2>
                                             <p className="slider_p-wapper">
@@ -800,7 +867,15 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider3.jpg" alt="Slide 4" className="slider_img_graph" />
+                                        <img 
+                                            src="https://bhargav1376.github.io/trading/Images/sliderimgs/slider4.jpg" 
+                                            alt="Slide 4" 
+                                            className="slider_img_graph"
+                                            onError={(e) => {
+                                                console.error('Failed to load slider4.jpg');
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Energy Upswing</h2>
                                             <p className="slider_p-wapper">
@@ -813,25 +888,20 @@ function Home() {
 
                                 <SwiperSlide>
                                     <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider4.jpg" alt="Slide 5" className="slider_img_graph" />
+                                        <img 
+                                            src="https://bhargav1376.github.io/trading/Images/sliderimgs/slider6.jpg" 
+                                            alt="Slide 5" 
+                                            className="slider_img_graph"
+                                            onError={(e) => {
+                                                console.error('Failed to load slider6.jpg');
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
                                         <div className="slide-text">
                                             <h2 className="slider_name">Retail Revival</h2>
                                             <p className="slider_p-wapper">
                                                 The "Retail Revival" charts clearly depict a significant rebound in consumer spending activities.
                                                 These visuals illustrate a positive upturn in retail markets corresponding with the reopening of various sectors.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-
-                                <SwiperSlide>
-                                    <div className="swiper-slide slider_img_graph-s">   
-                                        <img src="https://bhargav1376.github.io/trading/src/index/images/sliderimgs/slider6.jpg" alt="Slide 6" className="slider_img_graph" />
-                                        <div className="slide-text">
-                                            <h2 className="slider_name">Healthcare Growth</h2>
-                                            <p className="slider_p-wapper">
-                                                The "Healthcare Growth" charts clearly illustrate a continued upward movement in the value of biotech and pharmaceutical stocks.
-                                                These visualizations demonstrate an extension of a previously established positive.
                                             </p>
                                         </div>
                                     </div>
@@ -1021,7 +1091,7 @@ function Home() {
                         <div className="grid_link">
                             <div className="grid_first">
                                 <div className="img_gr_f">
-                                    <img src="https://bhargav1376.github.io/trading/src/index/images/Logo.png" alt="Logo" />
+                                    <img src="https://bhargav1376.github.io/trading/Images/Logo.png" alt="Logo" />
                                 </div>
                             </div>
                             <div className="grid_second">

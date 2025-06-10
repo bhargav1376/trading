@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Signin from './Signin/Signin';
 import Signup from './Signup/Signup';
 import Home from './index/Home';
@@ -16,7 +16,7 @@ import Profile from './Weblogin/Profile/Profile';
 
 function App() {
     return (
-        <Router basename="/trading">
+        <Router>
             <div className="App">
                 <Routes>
                     <Route path="/signin" element={<Signin />} />

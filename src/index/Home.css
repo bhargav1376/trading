@@ -1030,7 +1030,7 @@ padding-bottom: 20px;
   z-index: 1;
 }
 
-img.trading-image {
+img.img-src-login-h {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1455,14 +1455,16 @@ section.Slider_section-detail {
 }
 
 .slider_show-width {
-    position: relative;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .silder_show-animation {
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .silder_show-animation.Slidershow {
@@ -1470,11 +1472,20 @@ section.Slider_section-detail {
     transform: translateY(0);
 }
 
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 .swiper-slide {
-    background: #fff;
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -1485,8 +1496,7 @@ section.Slider_section-detail {
 .slider_img_graph-s {
     position: relative;
     width: 100%;
-    height: 300px;
-    overflow: hidden;
+    height: 100%;
 }
 
 .slider_img_graph {
@@ -1501,57 +1511,62 @@ section.Slider_section-detail {
 }
 
 .slide-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 20px;
-    background: #fff;
+    background: linear-gradient(to top, rgba(245, 245, 245, 0.8) );
+    color: white;
 }
 
 .slider_name {
     font-size: 1.5rem;
-    color: #333;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .slider_p-wapper {
     font-size: 0.9rem;
-    color: #666;
-    line-height: 1.5;
+    line-height: 1.4;
+    margin: 0;
 }
 
 .arrows_left-right {
     position: absolute;
     top: 50%;
-    width: 100%;
+    left: 0;
+    right: 0;
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
+    pointer-events: none;
     z-index: 10;
 }
 
 .swiper-button {
-    background: rgba(255, 255, 255, 0.9);
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .swiper-button:hover {
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .left-prev, .right-prev {
     background: none;
     border: none;
+    color: white;
     font-size: 1.5rem;
-    color: #333;
     cursor: pointer;
     padding: 0;
     width: 100%;
@@ -1569,16 +1584,18 @@ section.Slider_section-detail {
 .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
-    background: #ccc;
-    opacity: 1;
+    background: #999;
+    opacity: 0.5;
 }
 
 .swiper-pagination-bullet-active {
-    background: #007bff;
+    opacity: 1;
+    background: #fff;
 }
 
 @media (max-width: 768px) {
-    .slider_img_graph-s {
+    .swiper-slide {
+        width: 250px;
         height: 250px;
     }
 
