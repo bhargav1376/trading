@@ -10,6 +10,35 @@ import { Pagination, Navigation } from 'swiper/modules';
 
 // dark mode starts here 
 function Home() {
+    // Slides array must be declared before any hooks or functions that use it
+    const slides = [
+        {
+            img: 'https://bhargav1376.github.io/trading/Images/cuttrading5.jpeg',
+            title: "Professional Trading",
+            desc: "Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights."
+        },
+        {
+            img: 'https://bhargav1376.github.io/trading/Images/cuttrading1.jpeg',
+            title: "Advanced Charts",
+            desc: "Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data."
+        },
+        {
+            img: 'https://bhargav1376.github.io/trading/Images/trading3.jpg',
+            title: "Smart Alerts",
+            desc: "Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices."
+        },
+        {
+            img: 'https://bhargav1376.github.io/trading/Images/demobg1wat.png',
+            title: "Global Access",
+            desc: "Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading."
+        },
+        {
+            img: 'https://bhargav1376.github.io/trading/Images/trading10.webp',
+            title: "Secure Portfolio",
+            desc: "Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind."
+        }
+    ];
+
     const [theme, setTheme] = useState(() => {
         const stored = localStorage.getItem('theme-preference');
         if (stored) return stored;
@@ -48,6 +77,7 @@ function Home() {
     };
 
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openModal, setOpenModal] = useState(null);
     const [showDemoModal, setShowDemoModal] = useState(false);
@@ -60,6 +90,8 @@ function Home() {
     const [formErrors, setFormErrors] = useState({});
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [formStatus, setFormStatus] = useState({ type: '', message: '' });
+    const sliderWrapperRef = useRef(null);
+    const slidesRef = useRef([]);
 
     const animateSlideOut = useCallback((index) => {
         const img = document.querySelectorAll('.slide')[index]?.querySelector("img.Img_slider-img");
@@ -95,24 +127,130 @@ function Home() {
     }, [currentSlide, animateSlideIn, animateSlideOut]);
 
     const handleNextSlide = useCallback(() => {
-        const nextIndex = (currentSlide + 1) % 6;
-        showSlide(nextIndex);
-    }, [currentSlide, showSlide]);
-    
+        if (isAnimating) return;
+        setIsAnimating(true);
+
+        // Remove show classes from current slide
+        const currentSlideEl = slidesRef.current[currentSlide];
+        if (currentSlideEl) {
+            const img = currentSlideEl.querySelector('.Img_slider-img');
+            const matterImg = currentSlideEl.querySelector('.matter_img');
+            const title = currentSlideEl.querySelector('.Pro_trad');
+            const desc = currentSlideEl.querySelector('.Analyze_pro');
+            const connect = currentSlideEl.querySelector('.connect_more');
+
+            img?.classList.remove('show');
+            matterImg?.classList.remove('show');
+            title?.classList.remove('show');
+            desc?.classList.remove('show');
+            connect?.classList.remove('show');
+        }
+
+        // Update slide index
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+
+        // Add show classes to next slide after a short delay
+        setTimeout(() => {
+            const nextSlideEl = slidesRef.current[(currentSlide + 1) % slides.length];
+            if (nextSlideEl) {
+                const img = nextSlideEl.querySelector('.Img_slider-img');
+                const matterImg = nextSlideEl.querySelector('.matter_img');
+                const title = nextSlideEl.querySelector('.Pro_trad');
+                const desc = nextSlideEl.querySelector('.Analyze_pro');
+                const connect = nextSlideEl.querySelector('.connect_more');
+
+                img?.classList.add('show');
+                matterImg?.classList.add('show');
+                title?.classList.add('show');
+                desc?.classList.add('show');
+                connect?.classList.add('show');
+            }
+            setIsAnimating(false);
+        }, 100);
+    }, [currentSlide, isAnimating, slides.length]);
+
     const handlePrevSlide = useCallback(() => {
-        const prevIndex = (currentSlide - 1 + 6) % 6;
-        showSlide(prevIndex);
-    }, [currentSlide, showSlide]);
+        if (isAnimating) return;
+        setIsAnimating(true);
+
+        // Remove show classes from current slide
+        const currentSlideEl = slidesRef.current[currentSlide];
+        if (currentSlideEl) {
+            const img = currentSlideEl.querySelector('.Img_slider-img');
+            const matterImg = currentSlideEl.querySelector('.matter_img');
+            const title = currentSlideEl.querySelector('.Pro_trad');
+            const desc = currentSlideEl.querySelector('.Analyze_pro');
+            const connect = currentSlideEl.querySelector('.connect_more');
+
+            img?.classList.remove('show');
+            matterImg?.classList.remove('show');
+            title?.classList.remove('show');
+            desc?.classList.remove('show');
+            connect?.classList.remove('show');
+        }
+
+        // Update slide index
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
+        // Add show classes to previous slide after a short delay
+        setTimeout(() => {
+            const prevSlideEl = slidesRef.current[(currentSlide - 1 + slides.length) % slides.length];
+            if (prevSlideEl) {
+                const img = prevSlideEl.querySelector('.Img_slider-img');
+                const matterImg = prevSlideEl.querySelector('.matter_img');
+                const title = prevSlideEl.querySelector('.Pro_trad');
+                const desc = prevSlideEl.querySelector('.Analyze_pro');
+                const connect = prevSlideEl.querySelector('.connect_more');
+
+                img?.classList.add('show');
+                matterImg?.classList.add('show');
+                title?.classList.add('show');
+                desc?.classList.add('show');
+                connect?.classList.add('show');
+            }
+            setIsAnimating(false);
+        }, 100);
+    }, [currentSlide, isAnimating, slides.length]);
 
     useEffect(() => {
-        showSlide(currentSlide);
+        // Initialize first slide
+        const firstSlideEl = slidesRef.current[0];
+        if (firstSlideEl) {
+            const img = firstSlideEl.querySelector('.Img_slider-img');
+            const matterImg = firstSlideEl.querySelector('.matter_img');
+            const title = firstSlideEl.querySelector('.Pro_trad');
+            const desc = firstSlideEl.querySelector('.Analyze_pro');
+            const connect = firstSlideEl.querySelector('.connect_more');
 
-        const interval = setInterval(() => {
-            handleNextSlide();
-        }, 5000);
+            img?.classList.add('show');
+            matterImg?.classList.add('show');
+            title?.classList.add('show');
+            desc?.classList.add('show');
+            connect?.classList.add('show');
+        }
 
+        // Set up auto-slide interval
+        const interval = setInterval(handleNextSlide, 7000);
         return () => clearInterval(interval);
-    }, [handleNextSlide, showSlide, currentSlide]);
+    }, [handleNextSlide]);
+
+    // Update slider position when currentSlide changes
+    useEffect(() => {
+        if (sliderWrapperRef.current) {
+            sliderWrapperRef.current.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    }, [currentSlide]);
+
+    useEffect(() => {
+        const currentSlideElement = document.querySelector(`.Slider_img:nth-child(${currentSlide + 1})`);
+        if (currentSlideElement) {
+            const img = currentSlideElement.querySelector('.Img_slider-img');
+            const textEls = currentSlideElement.querySelectorAll('.Pro_trad, .Analyze_pro, .connect_more');
+            
+            if (img) img.classList.add('show');
+            textEls.forEach(el => el.classList.add('show'));
+        }
+    }, [currentSlide]);
 
     useEffect(() => {
         const mybutton = document.getElementById("scrollmyBtn");
@@ -133,34 +271,6 @@ function Home() {
             window.removeEventListener('scroll', scrollFunction);
         };
     }, []);
-
-    const slides = [
-        {
-            img: 'https://bhargav1376.github.io/trading/Images/cuttrading5.jpeg',
-            title: "Professional Trading",
-            desc: "Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights."
-        },
-        {
-            img: 'https://bhargav1376.github.io/trading/Images/cuttrading1.jpeg',
-            title: "Advanced Charts",
-            desc: "Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data."
-        },
-        {
-            img: 'https://bhargav1376.github.io/trading/Images/trading3.jpg',
-            title: "Smart Alerts",
-            desc: "Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices."
-        },
-        {
-            img: 'https://bhargav1376.github.io/trading/Images/demobg1wat.png',
-            title: "Global Access",
-            desc: "Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading."
-        },
-        {
-            img: 'https://bhargav1376.github.io/trading/Images/trading10.webp',
-            title: "Secure Portfolio",
-            desc: "Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind."
-        }
-    ];
 
     const headingRef = useRef(null);
     const gridRefs = useRef([]);
@@ -289,25 +399,13 @@ function Home() {
 
     const demoModalRef = useRef(null);
 
-    const openDemoModal = useCallback(() => {
+    const openDemoModal = () => {
         setShowDemoModal(true);
-        if (demoModalRef.current) {
-            demoModalRef.current.style.display = 'block';
-            setTimeout(() => {
-                demoModalRef.current.style.opacity = '1';
-            }, 10);
-        }
-    }, []);
+    };
 
-    const closeDemoModal = useCallback(() => {
-        if (demoModalRef.current) {
-            demoModalRef.current.style.opacity = '0';
-            setTimeout(() => {
-                setShowDemoModal(false);
-                demoModalRef.current.style.display = 'none';
-            }, 300);
-        }
-    }, []);
+    const closeDemoModal = () => {
+        setShowDemoModal(false);
+    };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -540,6 +638,15 @@ function Home() {
         });
     }, []);
 
+    const handleConnectClick = (e) => {
+        e.preventDefault();
+        // Scroll to the contact section
+        const contactSection = document.querySelector('.Contact_us-section');
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="Home">
             <header className="Header">
@@ -613,152 +720,45 @@ function Home() {
 
             <section className="Image_slider">
                 <div className="Slider_wrapper">
-                    <div className="Slider">
-                        <div className="Slider_img">
-                            <div className="grid_img">
-                                <div className="Img_slide">
-                                    <div className="Img_overlay"></div>
-                                    <img src="https://bhargav1376.github.io/trading/Images/cuttrading5.jpeg" alt="Slider Image 1" className="Img_slider-img" />
-                                    <div className="matter_img">
-                                        <h1 className="Pro_trad">Professional Trading</h1>
-                                        <p className="Analyze_pro">Analyze the market with real-time data and powerful indicators, make informed decisions with advanced charting tools, and stay ahead of trends with AI-driven insights.</p>
-                                        <div className="connect_more">
-                                            <a href="#" className="btn-txt">Connect</a>
+                    <div className="Slider" ref={sliderWrapperRef}>
+                        {slides.map((slide, index) => (
+                            <div 
+                                key={index} 
+                                className="Slider_img"
+                                ref={el => slidesRef.current[index] = el}
+                            >
+                                <div className="grid_img">
+                                    <div className="Img_slide">
+                                        <div className="Img_overlay"></div>
+                                        <img 
+                                            src={slide.img} 
+                                            alt={`Slider Image ${index + 1}`} 
+                                            className="Img_slider-img"
+                                            onError={(e) => {
+                                                console.error(`Failed to load image ${index + 1}`);
+                                                e.target.src = 'https://bhargav1376.github.io/trading/Images/Logo.png';
+                                            }}
+                                        />
+                                        <div className="matter_img">
+                                            <h1 className="Pro_trad">{slide.title}</h1>
+                                            <p className="Analyze_pro">{slide.desc}</p>
+                                            <div className="connect_more">
+                                                <a href="#" className="btn-txt" onClick={handleConnectClick}>Connect</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="Slider_img">
-                            <div className="grid_img">
-                                <div className="Img_slide">
-                                    <div className="Img_overlay"></div>
-                                    <img src="https://bhargav1376.github.io/trading/Images/cuttrading1.jpeg" alt="Slider Image 2" className="Img_slider-img" />
-                                    <div className="matter_img">
-                                        <h1 className="Pro_trad">Advanced Charts</h1>
-                                        <p className="Analyze_pro">Visualize trends with advanced and customizable charting tools. Compare multiple assets and timeframes seamlessly. Gain deeper insights with interactive and real-time visual data.</p>
-                                        <div className="connect_more">
-                                            <a href="#" className="btn-txt">Connect</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="Slider_img">
-                            <div className="grid_img">
-                                <div className="Img_slide">
-                                    <div className="Img_overlay"></div>
-                                    <img src="https://bhargav1376.github.io/trading/Images/trading3.jpg" alt="Slider Image 3" className="Img_slider-img" />
-                                    <div className="matter_img">
-                                        <h1 className="Pro_trad">Smart Alerts</h1>
-                                        <p className="Analyze_pro">Receive alerts when market movements match your strategy. Customize alert conditions for price, volume, or technical indicators. Stay informed in real-time across all your devices.</p>
-                                        <div className="connect_more">
-                                            <a href="#" className="btn-txt">Connect</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="Slider_img">
-                            <div className="grid_img">
-                                <div className="Img_slide">
-                                    <div className="Img_overlay"></div>
-                                    <img src="https://bhargav1376.github.io/trading/Images/demobg1wat.png" alt="Slider Image 4" className="Img_slider-img" />
-                                    <div className="matter_img">
-                                        <h1 className="Pro_trad">Global Access</h1>
-                                        <p className="Analyze_pro">Trade on international markets from a single platform. Access stocks, forex, and commodities across global exchanges. Diversify your portfolio with seamless cross-border trading.</p>
-                                        <div className="connect_more">
-                                            <a href="#" className="btn-txt">Connect</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="Slider_img">
-                            <div className="grid_img">
-                                <div className="Img_slide">
-                                    <div className="Img_overlay"></div>
-                                    <img src="https://bhargav1376.github.io/trading/Images/trading10.webp" alt="Slider Image 5" className="Img_slider-img" />
-                                    <div className="matter_img">
-                                        <h1 className="Pro_trad">Secure Portfolio</h1>
-                                        <p className="Analyze_pro">Keep your investments protected with advanced security. Benefit from encrypted transactions and multi-layer authentication. Monitor and manage your portfolio with confidence and peace of mind.</p>
-                                        <div className="connect_more">
-                                            <a href="#" className="btn-txt">Connect</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                     <div className="width_flex_slider_btn">
                         <div className="width_slider_flex">
-                            <button className="prev" id="prevBtn">&#10094;</button>
-                            <button className="next" id="nextBtn">&#10095;</button>
+                            <button className="prev" onClick={handlePrevSlide}>&#10094;</button>
+                            <button className="next" onClick={handleNextSlide}>&#10095;</button>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <script dangerouslySetInnerHTML={{
-                __html: `
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const slides = document.querySelectorAll("div.Slider_img");
-                        const sliderWrapper = document.querySelector("div.Slider");
-                        const prevButton = document.getElementById("prevBtn");
-                        const nextButton = document.getElementById("nextBtn");
-                        let currentIndex = 0;
-                    
-                        if (slides.length === 0 || !sliderWrapper) return;
-                    
-                        function animateSlideOut(index) {
-                            const img = slides[index].querySelector("img.Img_slider-img");
-                            const textEls = slides[index].querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more, div.matter_img");
-                    
-                            img.classList.remove("show");
-                            textEls.forEach(el => el.classList.remove("show"));
-                        }
-                    
-                        function animateSlideIn(index) {
-                            const img = slides[index].querySelector("img.Img_slider-img");
-                            const textEls = slides[index].querySelectorAll("h1.Pro_trad, p.Analyze_pro, div.connect_more,div.matter_img");
-                    
-                            img.classList.add("show");
-                            setTimeout(() => {
-                                textEls.forEach(el => el.classList.add("show"));
-                            }, 600);
-                        }
-                    
-                        function showSlide(index) {
-                            animateSlideOut(currentIndex);
-                    
-                            setTimeout(() => {
-                                sliderWrapper.style.transform = \`translateX(-\${index * 100}%)\`;
-                                setTimeout(() => {
-                                    animateSlideIn(index);
-                                }, 100);
-                            }, 500);
-                    
-                            currentIndex = index;
-                        }
-                    
-                        function nextSlide() {
-                            const nextIndex = (currentIndex + 1) % slides.length;
-                            showSlide(nextIndex);
-                        }
-                    
-                        function prevSlide() {
-                            const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-                            showSlide(prevIndex);
-                        }
-                    
-                        prevButton.addEventListener("click", prevSlide);
-                        nextButton.addEventListener("click", nextSlide);
-                    
-                        showSlide(currentIndex);
-                        setInterval(nextSlide, 7000);
-                    });
-                `
-            }} />
 
             <section className="Indicators" id="sectionind" ref={indicatorsSectionRef}>
                 <div className="Indicators-wr">
@@ -810,7 +810,7 @@ function Home() {
                 </div>
             )}
 
-            <section className="Demo_section" ref={demoSectionRef}>
+<section className="Demo_section" ref={demoSectionRef}>
                 <div className="Demo_section-wr">
                     <div className="Demo_img-wr">
                         <div className="banner">
@@ -843,11 +843,7 @@ function Home() {
                                 <div className="line2"></div>
                                 <div className="line3"></div>
                                 <div className="line4"></div>
-                                <div className="img_src-lo">
-                                    <div className="img-tr">
-                                        <img className="img-src-login-h" src="https://bhargav1376.github.io/trading/Images/tradinng2.jpg" alt="Trading" />
-                                    </div>
-                                </div>
+                                <img className="trading-image" src="https://bhargav1376.github.io/trading/Images/tradinng2.jpg" alt="Trading Business Image" />
                                 <div className="logo"> Trading <span>PRO</span></div>
                             </div>
                         </div>
@@ -856,11 +852,56 @@ function Home() {
             </section>
             
             {showDemoModal && (
-                <div className="demo-modal" ref={demoModalRef}>
-                    <div className="demo-modal-content">
-                        <h2>Demo Modal</h2>
-                        <p>This is a demo modal content.</p>
-                        <button onClick={closeDemoModal}>Close</button>
+                <div 
+                    className="demo-modal" 
+                    ref={demoModalRef}
+                    style={{ display: 'block' }}
+                >
+                    <div className="demo-contant-modal">
+                        <span 
+                            className="demo-close" 
+                            onClick={closeDemoModal}
+                            role="button"
+                            tabIndex={0}
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    closeDemoModal();
+                                }
+                            }}
+                        >
+                            &times;
+                        </span>
+                        <div className="matter-demo_l">
+                            <h2 className="Account_de">Open Account</h2>
+                            <p className="wel_set">Welcome to the demo account setup. Explore features before signing up!</p>
+                        </div>
+                        <div className="video_demo">
+                            <iframe 
+                                className="video_demo_iframe"
+                                src="https://www.youtube.com/embed/wjlJE9r2Rus" 
+                                title="YouTube video player" 
+                                frameBorder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                        <div className="open_demo_acc">
+                            <div className="open_demo_acc_btn">
+                                <button className="open_demo_btn">
+                                    <span className="left-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 15" width="16" height="16" fill="currentColor">
+                                            <path d="M 10 0 L 10 5 L 5 5 L 0 0 Z M 0 5 L 5 5 L 10 10 L 5 10 L 5 15 L 0 10 Z"></path>
+                                        </svg>
+                                    </span>
+                                    <span className="btn-text">Open Demo Account</span>
+                                    <span className="right-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
