@@ -176,3 +176,22 @@
     opacity: 1;
     pointer-events: auto;
 }
+
+/* Dark mode styles */
+:root {
+    --background: #ffffff;
+    --text: #000000;
+}
+
+[data-theme="dark"] {
+    --background: #1a1a1a;
+    --text: #ffffff;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add your existing dark mode styles here */
