@@ -545,7 +545,10 @@ function Home() {
             <header className="Header">
                 <nav className="Nav_bar">
                     <div className="Logo">
-                        <img src="https://bhargav1376.github.io/trading/Images/Logo.png" alt="Astrolite" className="Logo_img" />
+                        <img src="https://bhargav1376.github.io/trading/Images/unnamed.png" alt="Astrolite" className="Logo_img" onError={(e) => {
+                            console.error('Failed to load logo image');
+                            e.target.src = 'https://bhargav1376.github.io/trading/Images/Logo.png';
+                        }} />
                     </div>
                     <div className="hamburger-menu" onClick={toggleMenu}>
                         <i className={`fa ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
